@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity {
     public static final String GAME_TYPE = "GAME_TYPE";
     public static final String GAME_HUMAN = "HUMAN";
     public static final String GAME_RESULT = "GAME_RESULT";
+
 
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
@@ -54,6 +56,7 @@ public class MainActivity extends Activity {
             }
         });
     }
+
 
     public void quitGame(View view) {
         RequestQueue queue = Volley.newRequestQueue(this);
