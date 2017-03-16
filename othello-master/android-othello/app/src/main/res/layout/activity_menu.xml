@@ -68,14 +68,17 @@ tools:context="se.kth.sda.othello.MainActivity">
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="447dp" />
 
+
         <Button
             android:id="@+id/help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="help"
-            android:text="HELP"
+            android:text="Help"
             tools:layout_editor_absoluteX="380dp"
             tools:layout_editor_absoluteY="447dp" />
+
+
     </LinearLayout>
 
 </LinearLayout>
