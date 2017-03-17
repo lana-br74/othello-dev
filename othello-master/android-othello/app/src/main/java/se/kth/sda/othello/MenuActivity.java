@@ -23,6 +23,8 @@ public class MenuActivity extends Activity {
         startActivityForResult(intent, 0);
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Toast t = Toast.makeText(this, data.getExtras().getString(MainActivity.GAME_RESULT), Toast.LENGTH_SHORT);

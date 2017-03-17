@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity" />
+        <activity
+            android:name=".player.Help"
+            android:label="@string/title_activity_help"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

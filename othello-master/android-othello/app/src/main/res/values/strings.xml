@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidOthello</string>
-    </resources>
+    <string name="title_activity_help">Help</string>
+</resources>
