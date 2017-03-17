@@ -29,6 +29,7 @@ public class MenuActivity extends AppCompatActivity {
        startActivityForResult(intent, 0);
     }
 
+    /** Called when the user clicks the Help button */
      public void help(View v) {
 
          Intent itn = new Intent(this,HelpActivity.class);
