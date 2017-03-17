@@ -19,14 +19,7 @@
         </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity" />
-<<<<<<< HEAD
-        <activity
-            android:name=".player.Help"
-            android:label="@string/title_activity_help"
-            android:theme="@style/AppTheme.NoActionBar" />
-=======
         <activity android:name=".HelpActivity"></activity>
->>>>>>> c9e41f01471bce0281b5a82f9beed52435616bf7
     </application>
 
 </manifest>

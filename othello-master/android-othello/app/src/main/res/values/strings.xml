@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">AndroidOthello</string>
-<<<<<<< HEAD
-    <string name="title_activity_help">Help</string>
-=======
->>>>>>> c9e41f01471bce0281b5a82f9beed52435616bf7
 </resources>
