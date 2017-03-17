@@ -7,10 +7,6 @@
     android:orientation="vertical"
     tools:context="se.kth.sda.othello.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 
     <se.kth.sda.othello.BoardView
         android:layout_width="wrap_content"

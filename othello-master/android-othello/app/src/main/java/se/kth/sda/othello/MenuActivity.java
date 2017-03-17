@@ -36,6 +36,11 @@ public class MenuActivity extends AppCompatActivity {
          Intent itn = new Intent(this,HelpActivity.class);
          startActivity(itn);
      }
+    public void setting(View v) {
+
+        Intent itn = new Intent(this,SettingActivity.class);
+        startActivity(itn);
+    }
 
 
     @Override
