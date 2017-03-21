@@ -50,9 +50,13 @@ public class MainActivity extends Activity {
         boardView.setEventListener(new BoardView.BoardViewListener() {
             @Override
             public void onClick(int x, int y) {
-                String nodeId = NodeImp.format(x,y);
-                game.move(game.getPlayerInTurn().getId(), nodeId);
-                boardView.invalidate();
+                String nodeId = NodeImp.format(x, y);
+                try { //changes for othello
+                    game.move(game.getPlayerInTurn().getId(), nodeId);
+                    boardView.invalidate();
+                } catch (IllegalStateException e) {
+                    System.out.println("Invalid move");
+                }
             }
         });
     }
