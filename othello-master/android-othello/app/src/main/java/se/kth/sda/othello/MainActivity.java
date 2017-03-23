@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,12 +24,17 @@ import java.util.Map;
 import se.kth.sda.othello.imp.NodeImp;
 import se.kth.sda.othello.imp.OthelloFactoryImp;
 import se.kth.sda.othello.R;
+import se.kth.sda.othello.imp.Statistic;
 
 public class MainActivity extends Activity {
     public static final String GAME_TYPE = "GAME_TYPE";
     public static final String GAME_HUMAN = "HUMAN";
     public static final String GAME_RESULT = "GAME_RESULT";
 
+    TextView score1 ;
+    TextView score2 ;
+
+    BoardView boardView;
 
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
@@ -38,13 +44,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final BoardView boardView = (BoardView) findViewById(R.id.boardView);
+        boardView = (BoardView) findViewById(R.id.boardView);
+
+        score1 = (TextView)findViewById(R.id.score1);
+        score2 = (TextView)findViewById(R.id.score2);
 
         if (this.getIntent().getExtras().getString(GAME_TYPE).equals(GAME_HUMAN)) {
             game = gameFactory.createHumanGame();
         }
 
         game.start();
+        score1.setText(" "+2);
+        score2.setText(" "+2);
 
         boardView.setModel(game.getBoard());
         boardView.setEventListener(new BoardView.BoardViewListener() {
@@ -54,11 +65,15 @@ public class MainActivity extends Activity {
                 try { //changes for othello
                     game.move(game.getPlayerInTurn().getId(), nodeId);
                     boardView.invalidate();
+                    showScores();
+
                 } catch (IllegalStateException e) {
                     System.out.println("Invalid move");
                 }
             }
         });
+
+
     }
 
 
@@ -114,4 +129,11 @@ public class MainActivity extends Activity {
         setResult(RESULT_OK, intent);
         super.finish();
     }
+
+    public void showScores(){
+        Statistic statistic = boardView.analyse();
+        score1.setText(" "+statistic.P1Discs);
+        score2.setText(" "+statistic.P2Discs);
+    }
+
 }

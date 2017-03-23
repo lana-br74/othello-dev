@@ -11,6 +11,7 @@ import android.view.View;
 
 import se.kth.sda.othello.board.Board;
 import se.kth.sda.othello.board.Node;
+import se.kth.sda.othello.imp.Statistic;
 
 /**
  * Created by robertog on 2/7/17.
@@ -84,17 +85,37 @@ public class BoardView extends View {
         redPaint.setARGB(255, 255, 0, 0);
         Paint greenPaint = new Paint();
         greenPaint.setARGB(255, 0, 255, 0);
+
         for (Node node : model.getNodes()) {
             if (node.isMarked()) {
                 Paint color = node.getOccupantPlayerId().equals("P1") ? redPaint : greenPaint;
+
                 canvas.drawCircle(
                         (float)(width/8*(node.getXCoordinate()+0.5)),
                         (float)(height/8*(node.getYCoordinate()+0.5)),
                         (float)(Math.min(width/16,height/16)),
                         color);
+
             }
         }
     }
+
+    public  Statistic analyse() {
+        int P1Discs = 0;
+        int P2Discs = 0;
+        for (Node node : model.getNodes()) {
+            if (node.isMarked()) {
+                if (node.getOccupantPlayerId().equals("P1")) {
+                    P1Discs += 1;
+                } else {
+                    P2Discs += 1;
+                }
+            }
+
+        }
+        return new Statistic(P1Discs, P2Discs);
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
