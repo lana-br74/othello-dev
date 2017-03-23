@@ -19,44 +19,66 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quit match!"
-            android:onClick="quitGame"/>
+            android:onClick="quitGame"
+            android:text="Quit match!" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="play1:"  />
+            android:text="play1:"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imageWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            android:src="@drawable/white" />
 
         <TextView
             android:id="@+id/score1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:hint="score1"  />
+            android:hint=" "
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:text=" VS "
             android:textColor="@color/colorAccent"
-            android:text=" VS "  />
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="play2:"  />
+            android:text="play2:"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imageBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="20dp"
+            android:maxWidth="20dp"
+            android:src="@drawable/black" />
+
         <TextView
             android:id="@+id/score2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:hint="score2"  />
+            android:hint=" "
+            android:textSize="20dp" />
 
-     </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
