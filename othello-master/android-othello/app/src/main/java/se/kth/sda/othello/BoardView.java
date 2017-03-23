@@ -1,9 +1,11 @@
 package se.kth.sda.othello;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -19,6 +21,7 @@ import se.kth.sda.othello.imp.Statistic;
 
 public class BoardView extends View {
     private Board model;
+
 
     public void setModel(Board model) {
         this.model = model;
@@ -81,23 +84,45 @@ public class BoardView extends View {
         if (model == null)
             return;
 
-        Paint redPaint = new Paint();
-        redPaint.setARGB(255, 255, 0, 0);
-        Paint greenPaint = new Paint();
-        greenPaint.setARGB(255, 0, 255, 0);
 
-        for (Node node : model.getNodes()) {
+        //Paint redPaint = new Paint();
+        //redPaint.setARGB(255, 255, 0, 0);
+        //Paint greenPaint = new Paint();
+        //greenPaint.setARGB(255, 0, 255, 0);
+        for (Node node : model.getNodes())
             if (node.isMarked()) {
-                Paint color = node.getOccupantPlayerId().equals("P1") ? redPaint : greenPaint;
 
-                canvas.drawCircle(
-                        (float)(width/8*(node.getXCoordinate()+0.5)),
-                        (float)(height/8*(node.getYCoordinate()+0.5)),
-                        (float)(Math.min(width/16,height/16)),
-                        color);
+                //x==true ? player1Disc(node, width, height, canvas) : player2disc(node, width, height, canvas);
+                if (node.getOccupantPlayerId().equals("P1")){
+                    player2Dsc(node, width, height, canvas);
+                }else {
+                    player1Disc(node, width, height, canvas);
+                }
 
+
+                //canvas.drawCircle(
+                  //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
+                  //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
+                 //  (float) (Math.min(width / 16, height / 16)),
+                //color);
             }
-        }
+    }
+    //Drawing the black disc
+    public void player1Disc (Node node, int width, int height, Canvas canvas) {
+
+        Resources res = getResources();
+        Drawable draw = res.getDrawable(R.drawable.black);
+        draw.setBounds(node.getXCoordinate()*width/8, node.getYCoordinate()*height/8, (node.getXCoordinate()+1)*width/8, (node.getYCoordinate()+1)*height/8);
+        draw.draw(canvas);
+    }
+    //Drawing the white disc
+    public void player2Dsc (Node node, int width, int height, Canvas canvas) {
+
+        Resources res = getResources();
+        Drawable draw = res.getDrawable(R.drawable.white);
+        draw.setBounds(node.getXCoordinate()*width/8, node.getYCoordinate()*height/8, (node.getXCoordinate()+1)*width/8, (node.getYCoordinate()+1)*height/8);
+        draw.draw(canvas);
+
     }
 
     public  Statistic analyse() {
