@@ -60,17 +60,18 @@ public class BoardView extends View {
     protected void onDraw(Canvas canvas) {
         int height = getHeight();
         int width = getWidth();
-        Paint blackPaint = new Paint();
-        Paint whitePaint = new Paint();
+        Paint lightgreenPaint = new Paint();
+        Paint darkgreenPaint = new Paint();
 
-        whitePaint.setARGB(255, 255, 255, 255);
+        darkgreenPaint.setARGB(210, 0, 125, 180);
+        lightgreenPaint.setARGB(250, 0, 125, 180);
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 RectF rect = new RectF(width/8*i, height/8*j, width/8*(i+1), height/8*(j+1));
                 if ((i+j)%2 == 0)
-                    canvas.drawRect(rect, blackPaint);
+                    canvas.drawRect(rect, lightgreenPaint);
                 else
-                    canvas.drawRect(rect, whitePaint);
+                    canvas.drawRect(rect, darkgreenPaint);
             }
         }
 
