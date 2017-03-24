@@ -1,7 +1,7 @@
 package se.kth.sda.othello.imp;
 
 /**
- * Created by tmpuser-10209 on 3/22/17.
+ * Created by Shuai on 3/22/17.
  */
 
 /**
