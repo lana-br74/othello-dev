@@ -44,7 +44,15 @@ public class LoginActivity extends Activity {
         startActivity(itn);
     }
 
+    public void Login(View view){
+        Intent itn1 = new Intent(this, RegActivity.class);
+        startActivity(itn1);
+    }
+}
+
+    /* //This code to be used later <Samer>
     public void login(View view) {
+
         EditText inputLogin = (EditText) findViewById(R.id.edit_login);
         String login = inputLogin.getText().toString();
         EditText inputPwd = (EditText) findViewById(R.id.edit_pwd);
@@ -81,6 +89,6 @@ public class LoginActivity extends Activity {
         };
 
         queue.add(stringRequest);
-    }
-}
+    }*/
+
 

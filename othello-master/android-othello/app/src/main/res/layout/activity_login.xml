@@ -29,11 +29,12 @@
 
         <Button
             android:id="@+id/Start"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:onClick="Start"
-            android:text="Skip" />
+            android:text="Quick Play" />
 
     </LinearLayout>
 
@@ -48,22 +49,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Username" />
+            android:hint="Username"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/edit_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Password" />
+            android:hint="Password"
+            android:visibility="gone" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/Reg"
             style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="login"
+            android:onClick="Login"
             android:text="Log in" />
     </LinearLayout>
 
