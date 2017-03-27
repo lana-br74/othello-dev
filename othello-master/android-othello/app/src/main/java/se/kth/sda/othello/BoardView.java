@@ -13,6 +13,7 @@ import android.view.View;
 
 import se.kth.sda.othello.board.Board;
 import se.kth.sda.othello.board.Node;
+import se.kth.sda.othello.imp.Statistic;
 
 /**
  * Created by robertog on 2/7/17.
@@ -59,17 +60,18 @@ public class BoardView extends View {
     protected void onDraw(Canvas canvas) {
         int height = getHeight();
         int width = getWidth();
-        Paint blackPaint = new Paint();
-        Paint whitePaint = new Paint();
+        Paint lightgreenPaint = new Paint();
+        Paint darkgreenPaint = new Paint();
 
-        whitePaint.setARGB(255, 255, 255, 255);
+        darkgreenPaint.setARGB(210, 0, 125, 180);
+        lightgreenPaint.setARGB(250, 0, 125, 180);
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 RectF rect = new RectF(width/8*i, height/8*j, width/8*(i+1), height/8*(j+1));
                 if ((i+j)%2 == 0)
-                    canvas.drawRect(rect, blackPaint);
+                    canvas.drawRect(rect, lightgreenPaint);
                 else
-                    canvas.drawRect(rect, whitePaint);
+                    canvas.drawRect(rect, darkgreenPaint);
             }
         }
 
@@ -82,6 +84,7 @@ public class BoardView extends View {
 
         if (model == null)
             return;
+
 
         //Paint redPaint = new Paint();
         //redPaint.setARGB(255, 255, 0, 0);
@@ -99,9 +102,9 @@ public class BoardView extends View {
 
 
                 //canvas.drawCircle(
-                  //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
-                  //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
-                 //  (float) (Math.min(width / 16, height / 16)),
+                //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
+                //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
+                //  (float) (Math.min(width / 16, height / 16)),
                 //color);
             }
     }
@@ -122,6 +125,24 @@ public class BoardView extends View {
         draw.draw(canvas);
 
     }
+
+    //Compute the discs for the board
+    public  Statistic analyse() {
+        int P1Discs = 0;
+        int P2Discs = 0;
+        for (Node node : model.getNodes()) {
+            if (node.isMarked()) {
+                if (node.getOccupantPlayerId().equals("P1")) {
+                    P1Discs += 1;
+                } else {
+                    P2Discs += 1;
+                }
+            }
+
+        }
+        return new Statistic(P1Discs, P2Discs);
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
