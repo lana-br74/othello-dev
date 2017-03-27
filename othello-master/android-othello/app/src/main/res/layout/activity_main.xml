@@ -21,16 +21,15 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="61dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="quitGame"
-            android:text="Quit!" />
+            android:text="Quit match!" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="play1"
+            android:text="play1:"
             android:textSize="20dp" />
 
         <ImageView
@@ -60,7 +59,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="play2"
+            android:text="play2:"
             android:textSize="20dp" />
 
         <ImageView

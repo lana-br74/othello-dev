@@ -68,11 +68,11 @@ public class OthelloImp implements Othello {
                 return true;
             else
                 return false;
-            }
-
-            else
-                return false;
         }
+
+        else
+            return false;
+    }
 
 
 
@@ -270,14 +270,14 @@ public class OthelloImp implements Othello {
             for (int from_disc_x_pos = opponent_disc_pos_x;
                  from_disc_x_pos <= i; from_disc_x_pos++) {
 
-                    String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
-                    Node newNode = new NodeImp(nodeId_current_player, current_player);
-                    board.setNode(newNode);
-                        opponent_disc_pos_x++;
-                        opponent_disc_pos_y++;
-                }
-
+                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+                opponent_disc_pos_x++;
+                opponent_disc_pos_y++;
             }
+
+        }
 
         return true;
 
@@ -400,7 +400,7 @@ public class OthelloImp implements Othello {
         if(id_player != null)
             return (!(id_player.equals(playerId_playing)));
         else
-        return false;
+            return false;
 
     }
 

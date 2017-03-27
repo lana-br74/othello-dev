@@ -28,7 +28,10 @@ public class MenuActivity extends AppCompatActivity {
         intent.putExtra(MainActivity.GAME_TYPE, MainActivity.GAME_HUMAN);
        startActivityForResult(intent, 0);
     }
-
+    public void Login(View view){
+        Intent itn1 = new Intent(this, RegActivity.class);
+        startActivity(itn1);
+    }
 
      public void help(View v) {
 

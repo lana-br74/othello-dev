@@ -29,11 +29,12 @@
 
         <Button
             android:id="@+id/Start"
+            style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:onClick="Start"
-            android:text="Quick Start" />
+            android:text="Quick Play" />
 
     </LinearLayout>
 
@@ -58,12 +59,12 @@
             android:hint="Password" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/Reg"
             style="@android:style/Widget.Material.Light.Button.Inset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="login"
+            android:onClick="Login"
             android:text="Log in" />
     </LinearLayout>
 
