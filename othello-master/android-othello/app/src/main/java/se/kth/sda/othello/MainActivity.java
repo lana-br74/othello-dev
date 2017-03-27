@@ -54,6 +54,8 @@ public class MainActivity extends Activity {
         }
 
         game.start();
+
+        //Show the initial player's score.
         score1.setText(" "+2);
         score2.setText(" "+2);
 
@@ -130,6 +132,7 @@ public class MainActivity extends Activity {
         super.finish();
     }
 
+    //Show the scores in the Main GUI
     public void showScores(){
         Statistic statistic = boardView.analyse();
         score1.setText(" "+statistic.P1Discs);
