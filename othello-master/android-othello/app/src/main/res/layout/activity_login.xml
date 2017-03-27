@@ -49,16 +49,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Username"
-            android:visibility="gone" />
+            android:hint="Username" />
 
         <EditText
             android:id="@+id/edit_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Password"
-            android:visibility="gone" />
+            android:hint="Password" />
 
         <Button
             android:id="@+id/Reg"
