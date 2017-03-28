@@ -65,9 +65,9 @@ public class MainActivity extends Activity {
         score2.setText(" "+2);
 
         //Show the initial player's turn.
-        player1.setTextColor(Color.WHITE);
-        player1.setBackgroundColor(Color.BLUE);
-        player2.setTextColor(Color.BLACK);
+        player2.setTextColor(Color.WHITE);
+        player2.setBackgroundColor(Color.BLUE);
+        player1.setTextColor(Color.BLACK);
 
 
         boardView.setModel(game.getBoard());
@@ -148,15 +148,15 @@ public class MainActivity extends Activity {
     //Show the scores in the Main GUI
     public void showScores(){
         Statistic statistic = boardView.analyse();
-        score1.setText(" "+statistic.getP1Discs());
-        score2.setText(" "+statistic.getP2Discs());
+        score1.setText(" "+statistic.getP2Discs());
+        score2.setText(" "+statistic.getP1Discs());
     }
 
 
     //Show turn of the player
     public void showTurn(){
         String r = game.getPlayerInTurn().getName() ;
-        if (r.equals("Player 1"))
+        if (r.equals("Player 2"))
         {   player1.setTextColor(Color.WHITE);
             player1.setBackgroundColor(Color.BLUE);
             player2.setTextColor(Color.BLACK);
