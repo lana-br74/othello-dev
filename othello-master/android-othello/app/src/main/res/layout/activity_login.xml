@@ -44,20 +44,6 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Username" />
-
-        <EditText
-            android:id="@+id/edit_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Password" />
-
         <Button
             android:id="@+id/Reg"
             style="@android:style/Widget.Material.Light.Button.Inset"
@@ -65,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="Login"
-            android:text="Log in" />
+            android:text="Log in / Register" />
     </LinearLayout>
 
 </LinearLayout>
