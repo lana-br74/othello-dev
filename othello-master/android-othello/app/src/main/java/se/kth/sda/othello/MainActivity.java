@@ -3,9 +3,11 @@ package se.kth.sda.othello;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.ArrayMap;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
 
         game.start();
 
+
         //Show the initial player's score.
         score1.setText(" "+2);
         score2.setText(" "+2);
@@ -77,6 +80,28 @@ public class MainActivity extends Activity {
 
 
     }
+
+    public class Countdown extends CountDownTimer {
+
+        public Countdown(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+            int progress = (int) (millisUntilFinished/1000);
+
+
+        }
+
+        @Override
+        public void onFinish() {
+            game.getPlayerInTurn();
+
+        }
+    }
+
 
 
     public void quitGame(View view) {
@@ -139,4 +164,7 @@ public class MainActivity extends Activity {
         score2.setText(" "+statistic.P2Discs);
     }
 
+
 }
+
+

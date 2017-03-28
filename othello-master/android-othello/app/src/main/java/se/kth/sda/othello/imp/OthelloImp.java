@@ -394,6 +394,11 @@ public class OthelloImp implements Othello {
 
 
     private boolean isOpponentPlayerDisc(int x, int y,String playerId_playing) {
+        //check out of border position
+        if (x<0||x>7)
+            return false;
+        if(y<0||y>7)
+            return false;
         String nodeId = NodeImp.format(x,y);
         Node node = board.getNode(nodeId);
         String id_player = node.getOccupantPlayerId();
@@ -404,61 +409,61 @@ public class OthelloImp implements Othello {
 
     }
 
-    public boolean checkIfAdjacentNodesNotNull(int x,int y)
-    {   try {
+    public boolean checkIfAdjacentNodesNotNull(int x,int y) {
 
-        if (IsNodeOccupied(x + 1, y)) {
-            return true;
-        } else if ((IsNodeOccupied(x - 1, y)))
-            return true;
+            if (IsNodeOccupied(x + 1, y))
+                return true;
 
-        else if ((IsNodeOccupied(x, y + 1)))
+            else if ((IsNodeOccupied(x - 1, y)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x, y + 1)))
 
-        else if ((IsNodeOccupied(x - 1, y - 1)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x - 1, y - 1)))
 
-        else if ((IsNodeOccupied(x - 1, y + 1)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x - 1, y + 1)))
 
-        else if ((IsNodeOccupied(x + 1, y - 1)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x + 1, y - 1)))
 
-        else if ((IsNodeOccupied(x + 1, y + 1)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x + 1, y + 1)))
 
-        else if ((IsNodeOccupied(x + 1, y - 1)))
+                return true;
 
-            return true;
+            else if ((IsNodeOccupied(x + 1, y - 1)))
 
-        else
-            return false;
-    }
-    catch(ArrayIndexOutOfBoundsException e){
-        System.out.println("Invalid Position");
-        return false;
-    }
-
+                return true;
+            else
+                return false;
 
     }
+
+
+
 
 
     private boolean IsNodeOccupied(int x, int y) {
-        String nodeId = NodeImp.format(x,y);
-        Node node = board.getNode(nodeId);
-        String id_player = node.getOccupantPlayerId();
-        if (id_player==null)
-            return false;
-        else
-            return true;
-    }
+        //check out of border position
+            if (x<0||x>7)
+              return false;
+            if(y<0||y>7)
+                return false;
 
-
+                String nodeId = NodeImp.format(x, y);
+                Node node = board.getNode(nodeId);
+                String id_player = node.getOccupantPlayerId();
+                if (id_player == null)
+                    return false;
+                else
+                    return true;
+            }
 
 
     private void swapPlayer() {
