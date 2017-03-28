@@ -95,9 +95,9 @@ public class BoardView extends View {
 
                 //x==true ? player1Disc(node, width, height, canvas) : player2disc(node, width, height, canvas);
                 if (node.getOccupantPlayerId().equals("P1")){
-                    player2Dsc(node, width, height, canvas);
-                }else {
                     player1Disc(node, width, height, canvas);
+                }else {
+                    player2Disc(node, width, height, canvas);
                 }
 
 
@@ -117,7 +117,7 @@ public class BoardView extends View {
         draw.draw(canvas);
     }
     //Drawing the white disc
-    public void player2Dsc (Node node, int width, int height, Canvas canvas) {
+    public void player2Disc (Node node, int width, int height, Canvas canvas) {
 
         Resources res = getResources();
         Drawable draw = res.getDrawable(R.drawable.white);
