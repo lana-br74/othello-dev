@@ -152,6 +152,7 @@ public class MainActivity extends Activity {
         score2.setText(" "+statistic.getP2Discs());
     }
 
+
     //Show turn of the player
     public void showTurn(){
         String r = game.getPlayerInTurn().getName() ;
@@ -173,3 +174,6 @@ public class MainActivity extends Activity {
 
 
 }
+
+
+

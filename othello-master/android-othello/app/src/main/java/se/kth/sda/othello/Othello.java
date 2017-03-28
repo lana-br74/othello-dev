@@ -91,6 +91,8 @@ public interface Othello {
 	 */
 	public void start();
 
+
+
 	/**
 	 * Starts the game.
 	 * 

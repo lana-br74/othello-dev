@@ -1,51 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="370dp"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical">
+
 
         <EditText
             android:id="@+id/edit_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_weight="0.19"
             android:hint="Username" />
 
         <EditText
             android:id="@+id/edit_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_weight="0.16"
             android:hint="Password" />
 
         <Button
             android:id="@+id/button2"
             style="@android:style/Widget.Material.Light.Button.Inset"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_weight="1"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
             android:onClick="login"
             android:text="Log in" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="66dp" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Registration" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button"
+            style="@android:style/Widget.Material.Light.Button.Inset"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:onClick="reg"
+            android:text="New User" />
+
     </LinearLayout>
 
 </LinearLayout>
