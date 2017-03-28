@@ -102,9 +102,9 @@ public class BoardView extends View {
 
 
                 //canvas.drawCircle(
-                  //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
-                  //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
-                 //  (float) (Math.min(width / 16, height / 16)),
+                //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
+                //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
+                //  (float) (Math.min(width / 16, height / 16)),
                 //color);
             }
     }
