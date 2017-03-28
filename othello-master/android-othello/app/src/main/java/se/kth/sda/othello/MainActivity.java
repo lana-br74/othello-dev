@@ -2,6 +2,7 @@ package se.kth.sda.othello;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
@@ -33,12 +34,14 @@ public class MainActivity extends Activity {
 
     TextView score1 ;
     TextView score2 ;
-
+    TextView player1;
+    TextView player2;
     BoardView boardView;
 
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
 
+    TextView turn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,8 @@ public class MainActivity extends Activity {
 
         score1 = (TextView)findViewById(R.id.score1);
         score2 = (TextView)findViewById(R.id.score2);
+        player1 = (TextView)findViewById(R.id.player1);
+        player2 = (TextView)findViewById(R.id.player2);
 
         if (this.getIntent().getExtras().getString(GAME_TYPE).equals(GAME_HUMAN)) {
             game = gameFactory.createHumanGame();
@@ -59,6 +64,12 @@ public class MainActivity extends Activity {
         score1.setText(" "+2);
         score2.setText(" "+2);
 
+        //Show the initial player's turn.
+        player1.setTextColor(Color.WHITE);
+        player1.setBackgroundColor(Color.BLUE);
+        player2.setTextColor(Color.BLACK);
+
+
         boardView.setModel(game.getBoard());
         boardView.setEventListener(new BoardView.BoardViewListener() {
             @Override
@@ -68,6 +79,8 @@ public class MainActivity extends Activity {
                     game.move(game.getPlayerInTurn().getId(), nodeId);
                     boardView.invalidate();
                     showScores();
+                    showTurn();
+
 
                 } catch (IllegalStateException e) {
                     System.out.println("Invalid move");
@@ -135,8 +148,28 @@ public class MainActivity extends Activity {
     //Show the scores in the Main GUI
     public void showScores(){
         Statistic statistic = boardView.analyse();
-        score1.setText(" "+statistic.P1Discs);
-        score2.setText(" "+statistic.P2Discs);
+        score1.setText(" "+statistic.getP1Discs());
+        score2.setText(" "+statistic.getP2Discs());
     }
+
+    //Show turn of the player
+    public void showTurn(){
+        String r = game.getPlayerInTurn().getName() ;
+        if (r.equals("Player 1"))
+        {   player1.setTextColor(Color.WHITE);
+            player1.setBackgroundColor(Color.BLUE);
+            player2.setTextColor(Color.BLACK);
+            player2.setBackgroundColor(Color.WHITE);
+        }
+        else
+        {    player2.setTextColor(Color.WHITE);
+             player2.setBackgroundColor(Color.BLUE);
+             player1.setTextColor(Color.BLACK);
+             player1.setBackgroundColor(Color.WHITE);
+
+        }
+
+    }
+
 
 }
