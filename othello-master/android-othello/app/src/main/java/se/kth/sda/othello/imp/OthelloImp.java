@@ -7,7 +7,7 @@ import se.kth.sda.othello.Othello;
 import se.kth.sda.othello.board.Board;
 import se.kth.sda.othello.board.Node;
 import se.kth.sda.othello.player.Player;
-
+import android.widget.Toast;
 /**
  * Created by robertog on 2/7/17.
  */
@@ -48,7 +48,10 @@ public class OthelloImp implements Othello {
 
     @Override
     public boolean hasValidMove(String playerId) {
+
         return true;
+
+
     }
 
     @Override
