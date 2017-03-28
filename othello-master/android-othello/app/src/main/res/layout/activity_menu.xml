@@ -13,23 +13,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
-
-        <ImageButton
-            android:id="@+id/Reg"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="false"
-            android:background="@drawable/login_selector"
-            android:cropToPadding="false"
-            android:onClick="Login"
-            android:scaleType="fitCenter" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -69,41 +52,63 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_margin="2dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.99"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/help"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/help_selector"
-            android:onClick="help"
-            android:scaleType="fitCenter" />
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/setting"
+            <ImageButton
+                android:id="@+id/Reg"
+                android:layout_width="101dp"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_selector"
+                android:onClick="Login"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/settings_selector"
-            android:onClick="setting"
-            android:scaleType="fitCenter" />
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <ImageButton
-            android:id="@+id/quit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:background="@drawable/exit_selector"
-            android:onClick="quitGame"
-            android:scaleType="fitCenter" />
+            <ImageButton
+                android:id="@+id/help"
+                android:layout_width="35dp"
+                android:layout_height="49dp"
+                android:layout_gravity="right"
+                android:background="@drawable/help_selector"
+                android:onClick="help"
+                android:scaleType="fitCenter" />
 
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/setting"
+                android:layout_width="46dp"
+                android:layout_height="49dp"
+                android:background="@drawable/settings_selector"
+                android:onClick="setting"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
