@@ -9,12 +9,17 @@ package se.kth.sda.othello.imp;
  */
 public class Statistic {
 
-    public int P1Discs;
-    public int P2Discs;
+    private int P1Discs;
+    private int P2Discs;
 
     public Statistic(int P1Discs, int P2Discs) {
         this.P1Discs = P1Discs;
         this.P2Discs = P2Discs;
     }
 
+    public int getP1Discs()
+    { return P1Discs;}
+
+    public int getP2Discs()
+    { return P2Discs;}
 }
