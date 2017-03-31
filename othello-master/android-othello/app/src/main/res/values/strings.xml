@@ -4,7 +4,7 @@
     <string name="enter_your_first_name">enter_your_first_name</string>
     <string name="enter_password">enter_password</string>
     <string name="re_enter_password">re_enter_password</string>
-    <string name="enter_valid_email_id_optional">enter_valid_email_id_optional</string>
+    <string name="enter_valid_email_id">enter_valid_email_id</string>
     <string name="enter_last_name">enter_last_name</string>
     <string name="register">register</string>
 </resources>
