@@ -52,10 +52,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.99"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="0.46">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,9 +65,8 @@
 
             <ImageButton
                 android:id="@+id/Reg"
-                android:layout_width="101dp"
-                android:layout_height="49dp"
-                android:layout_weight="1"
+                android:layout_width="93dp"
+                android:layout_height="33dp"
                 android:background="@drawable/login_selector"
                 android:onClick="Login"
                 android:scaleType="fitCenter" />
@@ -88,22 +87,22 @@
 
             <ImageButton
                 android:id="@+id/help"
-                android:layout_width="35dp"
-                android:layout_height="49dp"
+                android:layout_width="22dp"
+                android:layout_height="31dp"
                 android:layout_gravity="right"
                 android:background="@drawable/help_selector"
                 android:onClick="help"
                 android:scaleType="fitCenter" />
 
             <Space
-                android:layout_width="5dp"
+                android:layout_width="10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <ImageButton
                 android:id="@+id/setting"
-                android:layout_width="46dp"
-                android:layout_height="49dp"
+                android:layout_width="36dp"
+                android:layout_height="31dp"
                 android:background="@drawable/settings_selector"
                 android:onClick="setting"
                 android:scaleType="fitCenter" />

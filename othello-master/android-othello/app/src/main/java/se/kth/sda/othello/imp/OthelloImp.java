@@ -424,15 +424,15 @@ public class OthelloImp implements Othello {
 
                 return true;
 
+            else if ((IsNodeOccupied(x, y -1)))
+
+                return true;
+
             else if ((IsNodeOccupied(x - 1, y - 1)))
 
                 return true;
 
             else if ((IsNodeOccupied(x - 1, y + 1)))
-
-                return true;
-
-            else if ((IsNodeOccupied(x + 1, y - 1)))
 
                 return true;
 

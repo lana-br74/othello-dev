@@ -3,6 +3,7 @@ package se.kth.sda.othello;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
@@ -53,6 +54,26 @@ public class MainActivity extends Activity {
         score2 = (TextView)findViewById(R.id.score2);
         player1 = (TextView)findViewById(R.id.player1);
         player2 = (TextView)findViewById(R.id.player2);
+        // Font path
+        String fontPath = "fonts/CelestiaMedium-v1.51.ttf";
+        String fontPath1 = "fonts/Pacifico.ttf";
+        String fontPath2 = "fonts/Capture_it.ttf";
+        String fontPath3 = "fonts/FFF_Tusj.ttf";
+        String fontPath4 = "fonts/SEASRN__.ttf";
+        //String fontPath2 = "fonts/HelveticaNeue-Bold_0.otf";
+
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath3);
+        //Typeface tf2 = Typeface.createFromAsset(getAssets(), fontPath3);
+
+        // Applying font
+        player1.setTypeface(tf);
+        player2.setTypeface(tf);
+        score1.setTypeface(tf);
+        score2.setTypeface(tf);
+
+
+
 
         if (this.getIntent().getExtras().getString(GAME_TYPE).equals(GAME_HUMAN)) {
             game = gameFactory.createHumanGame();
@@ -65,9 +86,9 @@ public class MainActivity extends Activity {
         score2.setText(" "+2);
 
         //Show the initial player's turn.
-        player2.setTextColor(Color.WHITE);
-        player2.setBackgroundColor(Color.BLUE);
-        player1.setTextColor(Color.BLACK);
+        player1.setTextColor(Color.WHITE);
+        player1.setBackgroundColor(Color.BLUE);
+        player2.setTextColor(Color.BLACK);
 
 
         boardView.setModel(game.getBoard());
@@ -148,15 +169,15 @@ public class MainActivity extends Activity {
     //Show the scores in the Main GUI
     public void showScores(){
         Statistic statistic = boardView.analyse();
-        score1.setText(" "+statistic.getP2Discs());
-        score2.setText(" "+statistic.getP1Discs());
+        score1.setText(" "+statistic.getP1Discs());
+        score2.setText(" "+statistic.getP2Discs());
     }
 
 
     //Show turn of the player
     public void showTurn(){
         String r = game.getPlayerInTurn().getName() ;
-        if (r.equals("Player 2"))
+        if (r.equals("Player 1"))
         {   player1.setTextColor(Color.WHITE);
             player1.setBackgroundColor(Color.BLUE);
             player2.setTextColor(Color.BLACK);
