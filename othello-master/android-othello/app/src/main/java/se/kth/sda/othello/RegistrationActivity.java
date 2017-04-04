@@ -34,7 +34,7 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void registerUser(View view){
+    public void registerUser(View view) {
 
         EditText firstnameView = (EditText) findViewById(R.id.edtfirstname);
         String firstName = firstnameView.getText().toString();
@@ -45,51 +45,63 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText inputPwd = (EditText) findViewById(R.id.edtPass);
         String password = inputPwd.getText().toString();
 
+        EditText inputPwd1 = (EditText) findViewById(R.id.edtConfirmPass);
+        String password1 = inputPwd1.getText().toString();
 
         EditText emailView = (EditText) findViewById(R.id.edtEmail);
         String email = emailView.getText().toString();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:4567/register/"+ userName;
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        final Map<String, String> mHeaders = new ArrayMap<String, String>();
 
-        mHeaders.put("name",firstName);
-        mHeaders.put("userName",userName);
-        mHeaders.put("password", password);
-        mHeaders.put("email",email);
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = "http://10.0.2.2:4567/register/" + userName;
 
-        // Request a string response from the provided URL.
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Toast.makeText(getBaseContext(), "Welcome .."+ response.getString("name"), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getBaseContext(), MenuActivity.class);
-                            startActivityForResult(intent, 0);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            final Map<String, String> mHeaders = new ArrayMap<String, String>();
+
+            mHeaders.put("name", firstName);
+            mHeaders.put("userName", userName);
+            mHeaders.put("password", password);
+            mHeaders.put("email", email);
+
+        if(firstName.isEmpty()| userName.isEmpty()|password.isEmpty()|password1.isEmpty()|email.isEmpty()){
+            Toast.makeText(getBaseContext(), "Please fill up all the fields", Toast.LENGTH_LONG).show();}
+             else if (!password.equals(password1)) {
+                Toast.makeText(getBaseContext(), "The Password is not identical", Toast.LENGTH_LONG).show();}
+        else if (!email.matches(emailPattern)){
+            Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();}
+        else {
+            // Request a string response from the provided URL.
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Toast.makeText(getBaseContext(), "Welcome .." + response.getString("name"), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                                startActivityForResult(intent, 0);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getBaseContext(), "Registration  failed! "+ error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Registration  failed! " + error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
 
 
-            }
-        }) {
-            public Map<String, String> getHeaders(){
+                }
+            }) {
+                public Map<String, String> getHeaders() {
 
-                return mHeaders;
-            }
-        };
+                    return mHeaders;
+                }
+            };
 
-        queue.add(stringRequest);
+            queue.add(stringRequest);
+        }
     }
-
-    }
+}
 
 
