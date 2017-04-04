@@ -1,5 +1,6 @@
 package se.kth.sda.othello.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -48,10 +49,26 @@ public class OthelloImp implements Othello {
 
     @Override
     public boolean hasValidMove(String playerId) {
-
-        return true;
-
-
+        /*List<Node> moves = new ArrayList<Node>();
+        Node move ;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                String nodeId = NodeImp.format(row, col);
+                move = new NodeImp(nodeId,playerId);
+                if (isMoveValid(playerId, nodeId))
+                {
+                    moves.add(move);
+                }
+            }
+        }
+        int a = moves.size();*/
+        int a =1;
+        if(a > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @Override
