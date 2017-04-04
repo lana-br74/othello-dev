@@ -43,11 +43,29 @@ public class MainActivity extends Activity {
     Othello game;
 
     TextView turn;
+
+    JSONObject jsonPlayer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent currentintent = getIntent();
+        String jsonString = currentintent.getStringExtra("player");
+        try {
+            jsonPlayer = new JSONObject(jsonString);
+        }catch(Exception e){
 
+        }
+        ///
+        /*
+         String name ="";
+         try {
+             name = jsonPlayer.getString("coins");
+         }catch(Exception e){
+
+         }
+        ///
+ */
         boardView = (BoardView) findViewById(R.id.boardView);
 
         score1 = (TextView)findViewById(R.id.score1);
