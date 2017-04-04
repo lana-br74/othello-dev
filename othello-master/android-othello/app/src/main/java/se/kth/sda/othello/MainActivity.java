@@ -38,9 +38,11 @@ public class MainActivity extends Activity {
     TextView player1;
     TextView player2;
     BoardView boardView;
+    Statistic statistic ;
 
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
+    private MessageDialog msgDialog;
 
     TextView turn;
 
@@ -115,10 +117,15 @@ public class MainActivity extends Activity {
             public void onClick(int x, int y) {
                 String nodeId = NodeImp.format(x, y);
                 try { //changes for othello
-                    game.move(game.getPlayerInTurn().getId(), nodeId);
-                    boardView.invalidate();
-                    showScores();
-                    showTurn();
+
+                        game.move(game.getPlayerInTurn().getId(), nodeId);
+                        boardView.invalidate();
+                        showScores();
+                        showTurn();
+                    if(!game.isActive()){
+                       // Toast.makeText(getBaseContext(), "Game is over", Toast.LENGTH_LONG).show();
+                        statistic = boardView.analyse();
+                        gameOver(statistic.getP1Discs() - statistic.getP2Discs());}
 
 
                 } catch (IllegalStateException e) {
@@ -186,7 +193,7 @@ public class MainActivity extends Activity {
 
     //Show the scores in the Main GUI
     public void showScores(){
-        Statistic statistic = boardView.analyse();
+        statistic = boardView.analyse();
         score1.setText(" "+statistic.getP1Discs());
         score2.setText(" "+statistic.getP2Discs());
     }
@@ -211,6 +218,20 @@ public class MainActivity extends Activity {
 
     }
 
+    //game over
+    private void gameOver(int winOrLoseOrDraw){
+
+        String msg = "";
+        if(winOrLoseOrDraw > 0){
+            msg = "Player1 win";
+        }else if(winOrLoseOrDraw == 0){
+            msg = "draw";
+        }else if(winOrLoseOrDraw < 0){
+            msg = "Player2 win";
+        }
+        msgDialog = new MessageDialog(MainActivity.this, msg);
+        msgDialog.show();
+    }
 
 }
 
