@@ -80,7 +80,8 @@ public class MainActivity extends Activity {
                     boardView.invalidate();
                     showScores();
                     showTurn();
-
+                if(!game.isActive())
+                     Toast.makeText(getBaseContext(), "Game is over", Toast.LENGTH_LONG).show();
 
                 } catch (IllegalStateException e) {
                     System.out.println("Invalid move");
