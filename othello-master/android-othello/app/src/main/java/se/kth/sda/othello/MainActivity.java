@@ -3,6 +3,7 @@ package se.kth.sda.othello;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.View;
@@ -55,6 +56,26 @@ public class MainActivity extends Activity {
         score2 = (TextView)findViewById(R.id.score2);
         player1 = (TextView)findViewById(R.id.player1);
         player2 = (TextView)findViewById(R.id.player2);
+        // Font path
+        String fontPath = "fonts/CelestiaMedium-v1.51.ttf";
+        String fontPath1 = "fonts/Pacifico.ttf";
+        String fontPath2 = "fonts/Capture_it.ttf";
+        String fontPath3 = "fonts/FFF_Tusj.ttf";
+        String fontPath4 = "fonts/SEASRN__.ttf";
+        //String fontPath2 = "fonts/HelveticaNeue-Bold_0.otf";
+
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), fontPath3);
+        //Typeface tf2 = Typeface.createFromAsset(getAssets(), fontPath3);
+
+        // Applying font
+        player1.setTypeface(tf);
+        player2.setTypeface(tf);
+        score1.setTypeface(tf);
+        score2.setTypeface(tf);
+
+
+
 
         if (this.getIntent().getExtras().getString(GAME_TYPE).equals(GAME_HUMAN)) {
             game = gameFactory.createHumanGame();
@@ -78,16 +99,19 @@ public class MainActivity extends Activity {
             public void onClick(int x, int y) {
                 String nodeId = NodeImp.format(x, y);
                 try { //changes for othello
+
                         game.move(game.getPlayerInTurn().getId(), nodeId);
                         boardView.invalidate();
                         showScores();
                         showTurn();
+                    if(!game.isActive()){
+                       // Toast.makeText(getBaseContext(), "Game is over", Toast.LENGTH_LONG).show();
+                        statistic = boardView.analyse();
+                        gameOver(statistic.getP1Discs() - statistic.getP2Discs());}
+
+
                 } catch (IllegalStateException e) {
                     System.out.println("Invalid move");
-                }
-                if(!game.hasValidMove("P1") && !game.hasValidMove("P2")){
-                    statistic = boardView.analyse();
-                    gameOver(statistic.getP1Discs() - statistic.getP2Discs());
                 }
             }
         });

@@ -1,101 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="se.kth.sda.othello.RegistrationActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context=".MainActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edtUsername"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edtlastname"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:ems="10"
-                android:hint="@string/desired_username"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
+                android:layout_margin="10dp"
+                android:layout_weight="0.19"
+                android:hint="@string/desired_username">
+                <requestFocus />
+                </EditText>
 
             <EditText
                 android:id="@+id/edtfirstname"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edtlastname"
-                android:layout_alignParentTop="true"
-                android:ems="10"
-                android:hint="@string/enter_your_first_name"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
+                android:layout_margin="10dp"
+                android:layout_weight="0.19"
+                android:hint="@string/enter_your_first_name" />
 
             <EditText
                 android:id="@+id/edtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edtUsername"
-                android:layout_below="@+id/edtUsername"
-                android:layout_marginTop="14dp"
-                android:ems="10"
-                android:hint="@string/enter_password"
-                android:inputType="textPassword"
-                android:singleLine="true" >
+                android:layout_margin="10dp"
+                android:layout_weight="0.19"
+                android:hint="@string/enter_password">
 
-                <requestFocus />
             </EditText>
 
             <EditText
                 android:id="@+id/edtConfirmPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edtPass"
-                android:layout_below="@+id/edtPass"
-                android:layout_marginTop="21dp"
-                android:ems="10"
-                android:hint="@string/re_enter_password"
-                android:inputType="textPassword"
-                android:singleLine="true" />
+                android:layout_margin="10dp"
+                android:layout_weight="0.19"
+                android:hint="@string/re_enter_password" />
 
             <EditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edtConfirmPass"
-                android:layout_below="@+id/edtConfirmPass"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="@string/enter_valid_email_id_optional"
-                android:inputType="textEmailAddress"
-                android:singleLine="true" />
-
-            <EditText
-                android:id="@+id/edtlastname"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edtUsername"
-                android:layout_below="@+id/edtfirstname"
-                android:layout_marginTop="19dp"
-                android:ems="10"
-                android:hint="@string/enter_last_name"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
+                android:layout_margin="10dp"
+                android:layout_weight="0.19"
+                android:hint="@string/enter_valid_email_id" />
 
             <Button
                 android:id="@+id/button1"
@@ -104,9 +62,11 @@
                 android:layout_alignLeft="@+id/edtEmail"
                 android:layout_below="@+id/edtEmail"
                 android:layout_marginTop="35dp"
+                android:onClick="registerUser"
                 android:text="@string/register" />
 
-        </RelativeLayout>
-    </ScrollView>
+    </LinearLayout>
+
+
 
 </LinearLayout>

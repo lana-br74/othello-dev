@@ -49,31 +49,81 @@ public class OthelloImp implements Othello {
 
     @Override
     public boolean hasValidMove(String playerId) {
-        /*List<Node> moves = new ArrayList<Node>();
-        Node move ;
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                String nodeId = NodeImp.format(row, col);
-                move = new NodeImp(nodeId,playerId);
-                if (isMoveValid(playerId, nodeId))
-                {
-                    moves.add(move);
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++) {
+                Node node = new NodeImp(x, y);
+                if (!IsNodeOccupied(x, y)) {
+                    if (checkIfAdjacentNodesNotNull(x, y)) {
+                        if (checkIfOpponentPlayerDiscPresentAdjacentDirections(playerId, node.getId())) {
+                            boolean check_left = false;
+                            boolean bottom_vertical = false;
+                            boolean check_right = false;
+                            boolean top_vertical = false;
+                            boolean top_left_diagonal = false;
+                            boolean top_right_diagonal = false;
+                            boolean bottom_right_diagonal = false;
+                            boolean bottom_left_diagonal = false;
+                            if (isOpponentPlayerDisc(x - 1, y, playerId)) {
+                                check_left = Is_current_player_disc_avail_end_left_horizontal(x - 1, y, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x + 1, y, playerId)) {
+                                check_right = Is_current_player_disc_avail_end_right_horizontal(x + 1, y, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x, y + 1, playerId)) {
+                                bottom_vertical = Is_current_player_disc_avail_end_bottom_vertical(x, y + 1, playerId);
+
+                            }
+                            if (isOpponentPlayerDisc(x, y - 1, playerId)) {
+
+                                top_vertical = Is_current_player_disc_avail_end_top_vertical(x, y - 1, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x - 1, y - 1, playerId)) {
+                                top_left_diagonal = Is_current_player_disc_avail_end_TopLeftDiagonal(x - 1, y - 1, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x + 1, y - 1, playerId)) {
+                                top_right_diagonal = Is_current_player_disc_avail_end_TopRightDiagonal(x + 1, y - 1, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x + 1, y + 1, playerId)) {
+                                bottom_right_diagonal = Is_current_player_disc_avail_end_BottomRightDiagonal(x + 1, y + 1, playerId);
+                            }
+                            if (isOpponentPlayerDisc(x - 1, y + 1, playerId)) {
+                                bottom_left_diagonal = Is_current_player_disc_avail_end_BottomLeftDiagonal(x - 1, y + 1, playerId);
+                            }
+                            if ((check_left == true) ||
+                                    (bottom_vertical == true)
+                                    || (check_right == true) || (top_vertical == true) || (top_left_diagonal == true) || (top_right_diagonal == true) ||
+                                    (bottom_right_diagonal == true) || (bottom_left_diagonal == true))
+                                return true;
+
+
+                        }
+
+
+                        }
+
+                    }
+
                 }
+
+
+
             }
-        }
-        int a = moves.size();*/
-        int a =1;
-        if(a > 0){
             return false;
         }
-        else{
-            return true;
-        }
-    }
+
 
     @Override
     public boolean isActive() {
-        return true;
+         if(hasValidMove(currentPlayer.getId()))
+             return true;
+         else  {
+               swapPlayer();
+               if(hasValidMove(currentPlayer.getId()))
+               return true;
+
+         }
+          return false;
+
     }
 
     @Override
@@ -84,14 +134,17 @@ public class OthelloImp implements Othello {
             return false;
 
         else if (checkIfAdjacentNodesNotNull(x, y)) {
-            if (checkIfOpponentPlayerDiscPresentAdjacentDirections( playerId, nodeId))
-                return true;
-            else
-                return false;
-        }
+            if (checkIfOpponentPlayerDiscPresentAdjacentDirections(playerId, nodeId)) {
+                if (checkIfOpponentPlayerDiscPresentFurtherAdjacentDirections(x, y, playerId)) {
+                    return true;
 
-        else
+                } else
+                    return false;
+            }
+
             return false;
+        }
+        return false;
     }
 
 
@@ -110,7 +163,13 @@ public class OthelloImp implements Othello {
                 !isOpponentPlayerDisc(x + 1, y - 1, playerId_playing))
 
             return false;
-        else {
+        else
+            return true;
+    }
+
+
+
+        public boolean checkIfOpponentPlayerDiscPresentFurtherAdjacentDirections(int x,int y, String playerId_playing){
             boolean check_left =false;
             boolean bottom_vertical=false;
             boolean check_right=false;
@@ -157,38 +216,68 @@ public class OthelloImp implements Othello {
 
 
         }
-    }
+
 
 
     private boolean checkOpponentDiscFurtherLeftHorizontal(int i, int j,String current_player) {
 
-        int opponent_disc_pos = i;
-        while (isOpponentPlayerDisc(opponent_disc_pos, j, current_player)) {
-            if(opponent_disc_pos==0) //reached end and only opponent disc till end,not valid
-                return false;
-            else opponent_disc_pos--;
+        if (Is_current_player_disc_avail_end_left_horizontal(i,j,current_player))
 
-        }
-
-
-        if (!(IsNodeOccupied(opponent_disc_pos, j)))//no node at this position so not valid move
-            return false;
-
-        else { //not opponent , not null then its current player disc
+        {   //not opponent , not null then its current player disc
             // its correct move,set all node from this position to
-
+            int opponent_disc_pos = i;
+            while (isOpponentPlayerDisc(opponent_disc_pos, j, current_player))
+                 opponent_disc_pos--;
             for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
                  current_player_nodes_positions_to_be_changed <= i; current_player_nodes_positions_to_be_changed++) {
                 String nodeId_current_player = NodeImp.format(current_player_nodes_positions_to_be_changed, j);
                 Node newNode = new NodeImp(nodeId_current_player, current_player);
                 board.setNode(newNode);
             }
-
+            return true;
         }
-        return true;
+        else return false;
+    }
+
+    private boolean Is_current_player_disc_avail_end_left_horizontal (int i, int j,String current_player){
+        int opponent_disc_pos = i;
+        while (isOpponentPlayerDisc(opponent_disc_pos, j, current_player)) {
+            if(opponent_disc_pos==0) //reached end and only opponent disc till end,not valid
+                return false;
+            else opponent_disc_pos--;
+        }
+
+
+        if (!(IsNodeOccupied(opponent_disc_pos, j)))//no node at this position so not valid move
+            return false;
+
+
+         return true;
+
     }
 
     private boolean checkOpponentDiscFurtherRightHorizontal(int i, int j, String current_player){
+
+        if (Is_current_player_disc_avail_end_right_horizontal(i,j,current_player)){
+
+            //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+            int opponent_disc_pos = i;
+            while (isOpponentPlayerDisc(opponent_disc_pos, j, current_player) )
+                opponent_disc_pos++;
+            for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
+                 current_player_nodes_positions_to_be_changed >=i; current_player_nodes_positions_to_be_changed--) {
+                String nodeId_current_player = NodeImp.format(current_player_nodes_positions_to_be_changed, j);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+            }
+            return true;
+        }
+        else return false;
+
+    }
+
+    private boolean Is_current_player_disc_avail_end_right_horizontal (int i, int j,String current_player){
         int opponent_disc_pos = i;
         while (isOpponentPlayerDisc(opponent_disc_pos, j, current_player) ) {
             if( opponent_disc_pos ==7)//reached end and only opponent disc till end,not valid
@@ -200,22 +289,31 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(opponent_disc_pos, j)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
-
-            for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
-                 current_player_nodes_positions_to_be_changed >=i; current_player_nodes_positions_to_be_changed--) {
-                String nodeId_current_player = NodeImp.format(current_player_nodes_positions_to_be_changed, j);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-            }
-
-        }
-        return true;
+         return true;
 
     }
 
+
+
     private boolean checkOpponentDiscFurtherTopVertical(int i, int j, String current_player) {
+       if (Is_current_player_disc_avail_end_top_vertical(i,j,current_player)){ //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+            int opponent_disc_pos = j;
+            while (isOpponentPlayerDisc(i, opponent_disc_pos, current_player))
+                opponent_disc_pos--;
+            for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
+                 current_player_nodes_positions_to_be_changed <= j; current_player_nodes_positions_to_be_changed++) {
+                String nodeId_current_player = NodeImp.format(i, current_player_nodes_positions_to_be_changed);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+            }
+           return true;
+        }
+       else return false;
+    }
+
+
+    private boolean Is_current_player_disc_avail_end_top_vertical (int i, int j,String current_player){
         int opponent_disc_pos = j;
         while (isOpponentPlayerDisc(i, opponent_disc_pos, current_player)) {
             if( opponent_disc_pos ==0)//reached end and only opponent disc till end,not valid
@@ -227,23 +325,29 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(i, opponent_disc_pos)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
+         return true;
 
-            for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
-                 current_player_nodes_positions_to_be_changed <= j; current_player_nodes_positions_to_be_changed++) {
+    }
+
+    private boolean checkOpponentDiscFurtherBottomVertical(int i, int j,String current_player) {
+
+       if(Is_current_player_disc_avail_end_bottom_vertical(i,j,current_player)){ //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+           int opponent_disc_pos = j;
+           while (isOpponentPlayerDisc(i, opponent_disc_pos, current_player))
+               opponent_disc_pos++;
+               for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
+                 current_player_nodes_positions_to_be_changed >= j; current_player_nodes_positions_to_be_changed--) {
                 String nodeId_current_player = NodeImp.format(i, current_player_nodes_positions_to_be_changed);
                 Node newNode = new NodeImp(nodeId_current_player, current_player);
                 board.setNode(newNode);
             }
-
+           return true;
         }
-        return true;
+       else return false;
     }
 
-
-    private boolean checkOpponentDiscFurtherBottomVertical(int i, int j,String current_player) {
-
+    private boolean Is_current_player_disc_avail_end_bottom_vertical (int i, int j,String current_player){
         int opponent_disc_pos = j;
         while (isOpponentPlayerDisc(i, opponent_disc_pos, current_player)) {
             if( opponent_disc_pos ==7)//reached end and only opponent disc till end,not valid
@@ -254,21 +358,39 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(i, opponent_disc_pos)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
+         return true;
 
-            for (int current_player_nodes_positions_to_be_changed = opponent_disc_pos;
-                 current_player_nodes_positions_to_be_changed >= j; current_player_nodes_positions_to_be_changed--) {
-                String nodeId_current_player = NodeImp.format(i, current_player_nodes_positions_to_be_changed);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-            }
-
-        }
-        return true;
     }
 
     private boolean checkOpponentDiscFurtherTopLeftDiagonal(int i, int j, String current_player){
+       //no node at this position so not valid move
+
+        if(Is_current_player_disc_avail_end_TopLeftDiagonal(i,j,current_player)) { //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+            int opponent_disc_pos_x = i;
+            int opponent_disc_pos_y = j;
+            while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) )
+            {
+                opponent_disc_pos_x--;
+                opponent_disc_pos_y--;
+            }
+            for (int from_disc_x_pos = opponent_disc_pos_x;
+                 from_disc_x_pos <= i; from_disc_x_pos++) {
+
+                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+                opponent_disc_pos_x++;
+                opponent_disc_pos_y++;
+            }
+            return true;
+        }
+
+        else return false;
+
+    }
+
+    private boolean Is_current_player_disc_avail_end_TopLeftDiagonal (int i, int j,String current_player){
         int opponent_disc_pos_x = i;
         int opponent_disc_pos_y = j;
         while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) ) {
@@ -284,27 +406,40 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(opponent_disc_pos_x, opponent_disc_pos_y)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
-
-            for (int from_disc_x_pos = opponent_disc_pos_x;
-                 from_disc_x_pos <= i; from_disc_x_pos++) {
-
-                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-                opponent_disc_pos_x++;
-                opponent_disc_pos_y++;
-            }
-
-        }
-
-        return true;
+         return true;
 
     }
 
 
     private boolean checkOpponentDiscFurtherTopRightDiagonal(int i, int j, String current_player){
+       //no node at this position so not valid move
+
+        if(Is_current_player_disc_avail_end_TopRightDiagonal(i,j,current_player)) { //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+            int opponent_disc_pos_x = i;
+            int opponent_disc_pos_y = j;
+            while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) )
+            {
+                opponent_disc_pos_x++;
+                opponent_disc_pos_y--;
+            }
+            for (int from_disc_x_pos = opponent_disc_pos_x;
+                 from_disc_x_pos >= i; from_disc_x_pos--) {
+
+                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+                opponent_disc_pos_x--;
+                opponent_disc_pos_y++;
+            }
+            return true;
+        }
+
+        else return false;
+
+    }
+
+    private boolean Is_current_player_disc_avail_end_TopRightDiagonal (int i, int j,String current_player){
         int opponent_disc_pos_x = i;
         int opponent_disc_pos_y = j;
         while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) ) {
@@ -320,28 +455,39 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(opponent_disc_pos_x, opponent_disc_pos_y)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
-
-            for (int from_disc_x_pos = opponent_disc_pos_x;
-                 from_disc_x_pos >= i; from_disc_x_pos--) {
-
-                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-                opponent_disc_pos_x--;
-                opponent_disc_pos_y++;
-            }
-
-        }
-
-        return true;
+         return true;
 
     }
 
 
 
     private boolean checkOpponentDiscFurtherBottomRightDiagonal(int i, int j, String current_player){
+      if (Is_current_player_disc_avail_end_BottomRightDiagonal(i,j,current_player)){ //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+          int opponent_disc_pos_x = i;
+          int opponent_disc_pos_y = j;
+          while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) )
+          {
+              opponent_disc_pos_x++;
+              opponent_disc_pos_y++;
+          }
+            for (int from_disc_x_pos = opponent_disc_pos_x;
+                 from_disc_x_pos >= i; from_disc_x_pos--) {
+
+                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+                opponent_disc_pos_x--;
+                opponent_disc_pos_y--;
+            }
+          return true;
+        }
+
+      else return false;
+
+    }
+
+    private boolean Is_current_player_disc_avail_end_BottomRightDiagonal (int i, int j,String current_player){
         int opponent_disc_pos_x = i;
         int opponent_disc_pos_y = j;
         while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) ) {
@@ -357,27 +503,39 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(opponent_disc_pos_x, opponent_disc_pos_y)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
-
-            for (int from_disc_x_pos = opponent_disc_pos_x;
-                 from_disc_x_pos >= i; from_disc_x_pos--) {
-
-                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-                opponent_disc_pos_x--;
-                opponent_disc_pos_y--;
-            }
-
-        }
-
-        return true;
+         return true;
 
     }
 
 
+
     private boolean checkOpponentDiscFurtherBottomLeftDiagonal(int i, int j, String current_player){
+        if (Is_current_player_disc_avail_end_BottomLeftDiagonal(i,j,current_player)){ //not opponent , not null then its current player disc
+            // its correct move,set all node from this position to
+            int opponent_disc_pos_x = i;
+            int opponent_disc_pos_y = j;
+            while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) )
+            {
+                opponent_disc_pos_x--;
+                opponent_disc_pos_y++;
+            }
+            for (int from_disc_x_pos = opponent_disc_pos_x;
+                 from_disc_x_pos <= i; from_disc_x_pos++) {
+
+                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
+                Node newNode = new NodeImp(nodeId_current_player, current_player);
+                board.setNode(newNode);
+                opponent_disc_pos_x++;
+                opponent_disc_pos_y--;
+            }
+          return true;
+        }
+
+        else return false;
+
+    }
+
+    private boolean Is_current_player_disc_avail_end_BottomLeftDiagonal(int i, int j,String current_player){
         int opponent_disc_pos_x = i;
         int opponent_disc_pos_y = j;
         while (isOpponentPlayerDisc(opponent_disc_pos_x, opponent_disc_pos_y, current_player) ) {
@@ -393,22 +551,7 @@ public class OthelloImp implements Othello {
         if (!(IsNodeOccupied(opponent_disc_pos_x, opponent_disc_pos_y)))
             return false;//no node at this position so not valid move
 
-        else { //not opponent , not null then its current player disc
-            // its correct move,set all node from this position to
-
-            for (int from_disc_x_pos = opponent_disc_pos_x;
-                 from_disc_x_pos <= i; from_disc_x_pos++) {
-
-                String nodeId_current_player = NodeImp.format(opponent_disc_pos_x, opponent_disc_pos_y);
-                Node newNode = new NodeImp(nodeId_current_player, current_player);
-                board.setNode(newNode);
-                opponent_disc_pos_x++;
-                opponent_disc_pos_y--;
-            }
-
-        }
-
-        return true;
+         return true;
 
     }
 
@@ -505,8 +648,10 @@ public class OthelloImp implements Othello {
 
     @Override
     public List<Node> move(String playerId, String nodeId) throws IllegalStateException {
+
         if (currentPlayer.getType() != Player.Type.HUMAN)
             throw new IllegalStateException("Current player is not a human");
+
         if (!isMoveValid(playerId, nodeId))
             throw new IllegalStateException("Invalid move");
         if (playerId != currentPlayer.getId())
@@ -518,6 +663,7 @@ public class OthelloImp implements Othello {
         res.add(newNode);
 
         swapPlayer();
+
 
         return res;
     }
