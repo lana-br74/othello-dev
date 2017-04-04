@@ -51,9 +51,17 @@ public class RegistrationActivity extends AppCompatActivity {
         EditText emailView = (EditText) findViewById(R.id.edtEmail);
         String email = emailView.getText().toString();
 
+        // Validation.
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-
+        if(firstName.isEmpty()| userName.isEmpty()|password.isEmpty()|password1.isEmpty()|email.isEmpty()){
+            Toast.makeText(getBaseContext(), "Please fill up all the fields", Toast.LENGTH_LONG).show();}
+        else if (!password.equals(password1)) {
+            Toast.makeText(getBaseContext(), "Not identical Password", Toast.LENGTH_LONG).show();}
+        else if (!email.matches(emailPattern)){
+            Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();}
+        else {
+        //
             RequestQueue queue = Volley.newRequestQueue(this);
             String url = "http://10.0.2.2:4567/register/" + userName;
 
@@ -64,13 +72,6 @@ public class RegistrationActivity extends AppCompatActivity {
             mHeaders.put("password", password);
             mHeaders.put("email", email);
 
-        if(firstName.isEmpty()| userName.isEmpty()|password.isEmpty()|password1.isEmpty()|email.isEmpty()){
-            Toast.makeText(getBaseContext(), "Please fill up all the fields", Toast.LENGTH_LONG).show();}
-             else if (!password.equals(password1)) {
-                Toast.makeText(getBaseContext(), "The Password is not identical", Toast.LENGTH_LONG).show();}
-        else if (!email.matches(emailPattern)){
-            Toast.makeText(getBaseContext(), "Invalid Email", Toast.LENGTH_LONG).show();}
-        else {
             // Request a string response from the provided URL.
             JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                     new Response.Listener<JSONObject>() {
