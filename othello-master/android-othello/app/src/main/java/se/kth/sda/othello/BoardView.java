@@ -3,6 +3,7 @@ package se.kth.sda.othello;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
@@ -62,6 +63,10 @@ public class BoardView extends View {
         int width = getWidth();
         Paint lightgreenPaint = new Paint();
         Paint darkgreenPaint = new Paint();
+        //Paint paint = new Paint();
+        //canvas.drawLine(100, 200, 300, 400, paint);
+        //canvas.drawLine(200, 100, 500, 200, paint);
+        //paint.setColor(Color.BLACK);
 
         darkgreenPaint.setARGB(210, 0, 125, 180);
         lightgreenPaint.setARGB(250, 0, 125, 180);
