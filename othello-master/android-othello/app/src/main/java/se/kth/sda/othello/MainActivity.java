@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
     private MessageDialog msgDialog;
+    boolean userIsLoggedIn = false;
 
     TextView turn;
 
@@ -52,11 +53,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent currentintent = getIntent();
-        String jsonString = currentintent.getStringExtra("player");
-        try {
-            jsonPlayer = new JSONObject(jsonString);
-        }catch(Exception e){
+        Bundle extras = currentintent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey("player")) {
+                userIsLoggedIn = true;
+                String jsonString = currentintent.getStringExtra("player");
+                try {
+                    jsonPlayer = new JSONObject(jsonString);
+                }catch(Exception e){
 
+                }
+            }
         }
         ///
         /*

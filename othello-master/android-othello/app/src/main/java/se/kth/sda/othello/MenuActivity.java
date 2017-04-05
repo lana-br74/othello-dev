@@ -17,6 +17,7 @@ public class MenuActivity extends AppCompatActivity {
   //  User currentPlayer = null;
   //  Intent currentintent = getIntent();
    JSONObject jsonPlayer = null;
+    boolean userIsLoggedIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,18 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Intent currentintent = getIntent();
-        String jsonString = currentintent.getStringExtra("player");
-        try {
-            jsonPlayer = new JSONObject(jsonString);
-        }catch(Exception e){
 
+        Bundle extras = currentintent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey("player")) {
+                userIsLoggedIn = true;
+                String jsonString = currentintent.getStringExtra("player");
+                try {
+                    jsonPlayer = new JSONObject(jsonString);
+                }catch(Exception e){
+
+                }
+            }
         }
 
     }
@@ -38,16 +46,19 @@ public class MenuActivity extends AppCompatActivity {
 
 
          String name ="";
-         try {
-             name = jsonPlayer.getString("coins");
-         }catch(Exception e){
+         if(userIsLoggedIn) {
+             try {
+                 name = jsonPlayer.getString("coins");
+             } catch (Exception e) {
 
+             }
          }
+
          Toast t = Toast.makeText(this,""+name, Toast.LENGTH_SHORT);
          t.show();
 
          Intent intent = new Intent(this, MainActivity.class);
-         intent.putExtra("player",jsonPlayer.toString());
+         if(userIsLoggedIn) intent.putExtra("player",jsonPlayer.toString());
 
 
 
