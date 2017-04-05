@@ -16,8 +16,19 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text=""
-            android:textColor="#000000"
-            android:textSize="18sp"
+            android:textColor="@color/colorBlue"
+            android:textSize="40sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="@color/colorBlue"
+            android:textSize="40sp"
             android:gravity="center"/>
 
         <Button
@@ -30,10 +41,19 @@
             android:layout_marginBottom="20dp"
             android:padding="10dp"
             android:textSize="18sp"
-            android:text="OK"
-            />
+            android:text="Show The Board"/>
 
-
+        <Button
+            android:id="@+id/TryAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:text="Play Again"/>
 
     </LinearLayout>
 

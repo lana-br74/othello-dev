@@ -104,8 +104,7 @@ public class MainActivity extends Activity {
                         boardView.invalidate();
                         showScores();
                         showTurn();
-                    if(!game.isActive()){
-                       // Toast.makeText(getBaseContext(), "Game is over", Toast.LENGTH_LONG).show();
+                     if(!game.isActive()){
                         statistic = boardView.analyse();
                         gameOver(statistic.getP1Discs() - statistic.getP2Discs());}
 
@@ -204,6 +203,8 @@ public class MainActivity extends Activity {
     private void gameOver(int winOrLoseOrDraw){
 
         String msg = "";
+        String score = ""+ statistic.getP1Discs()+ "  VS  " + statistic.getP2Discs();
+
         if(winOrLoseOrDraw > 0){
             msg = "Player1 win";
         }else if(winOrLoseOrDraw == 0){
@@ -211,7 +212,7 @@ public class MainActivity extends Activity {
         }else if(winOrLoseOrDraw < 0){
             msg = "Player2 win";
         }
-        msgDialog = new MessageDialog(MainActivity.this, msg);
+        msgDialog = new MessageDialog(MainActivity.this, msg,score);
         msgDialog.show();
     }
 
