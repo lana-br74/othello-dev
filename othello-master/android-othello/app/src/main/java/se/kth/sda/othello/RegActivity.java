@@ -69,8 +69,10 @@ public class RegActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Toast.makeText(getBaseContext(), "Welcome .."+response.getString("name"), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "Welcome "+response.getString("name"), Toast.LENGTH_LONG).show();
+                            User user = new User(response);
                             Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                            intent.putExtra("player",response.toString());
                             startActivityForResult(intent, 0);
                         } catch (JSONException e) {
                             e.printStackTrace();

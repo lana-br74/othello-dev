@@ -65,6 +65,11 @@ public class UserData {
 
 		return false;
 	}
+	
+	public User getUser(String username){
+       User user = data.get(username);
+		return user;		
+	}
 
 	public void addSomeData(){
 		registerUser("lana@hotmail.com","lana","1234","lanaBar");
