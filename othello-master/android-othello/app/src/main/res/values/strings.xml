@@ -1,4 +1,8 @@
 <resources>
+    <string name="facebook_app_id">1423836377688211</string>
+
+    <string name="fb_login_protocol_scheme">fb1423836377688211</string>
+
     <string name="app_name">AndroidOthello</string>
     <string name="desired_username">desired_username</string>
     <string name="enter_your_first_name">enter_your_first_name</string>
