@@ -20,14 +20,6 @@ public interface Othello {
 	 */
 	public Board getBoard();
 
-	/**
-	 * Returns the nodes that will be swapped for a move at the given nodeId.
-	 * 
-	 * @param playerId the id of the player making the move
-	 * @param nodeId the id of the node where the move is made
-	 * @return the list of nodes that will be swapped for the given move
-	 */
-	public List<Node> getNodesToSwap(String playerId, String nodeId);
 
 	/**
 	 * Get the player in turn or null if no player can move

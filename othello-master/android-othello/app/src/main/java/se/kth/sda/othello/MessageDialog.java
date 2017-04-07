@@ -1,6 +1,8 @@
 package se.kth.sda.othello;
 
-
+/**
+ * Created by Shuai on 3/28/17.
+ */
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-/*
+/**
  * The dialog of game over
  */
 public class MessageDialog extends Dialog {

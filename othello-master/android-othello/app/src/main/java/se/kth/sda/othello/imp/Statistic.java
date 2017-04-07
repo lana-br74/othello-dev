@@ -5,7 +5,7 @@ package se.kth.sda.othello.imp;
  */
 
 /**
- * player's discs
+ * The two player's discs
  */
 public class Statistic {
 

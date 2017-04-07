@@ -61,22 +61,25 @@ public class BoardView extends View {
     protected void onDraw(Canvas canvas) {
         int height = getHeight();
         int width = getWidth();
-        Paint lightgreenPaint = new Paint();
-        Paint darkgreenPaint = new Paint();
+        //Paint lightgreenPaint = new Paint();
+        //Paint darkgreenPaint = new Paint();
+
+
+
         //Paint paint = new Paint();
         //canvas.drawLine(100, 200, 300, 400, paint);
         //canvas.drawLine(200, 100, 500, 200, paint);
         //paint.setColor(Color.BLACK);
 
-        darkgreenPaint.setARGB(210, 0, 125, 180);
-        lightgreenPaint.setARGB(250, 0, 125, 180);
+        //darkgreenPaint.setARGB(210, 0, 125, 180);
+        //lightgreenPaint.setARGB(250, 0, 125, 180);
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
-                RectF rect = new RectF(width/8*i, height/8*j, width/8*(i+1), height/8*(j+1));
-                if ((i+j)%2 == 0)
-                    canvas.drawRect(rect, lightgreenPaint);
-                else
-                    canvas.drawRect(rect, darkgreenPaint);
+                Resources res = getResources();
+                Drawable bg = res.getDrawable(R.drawable.boardbg);
+                bg.setBounds(width/8*i, height/8*j, width/8*(i+1), height/8*(j+1));
+                bg.draw(canvas);
+
             }
         }
 
@@ -131,8 +134,10 @@ public class BoardView extends View {
 
     }
 
-    /*
+    /**
+     * @author Shuai
      * Compute the discs in the board
+     * @return An Object including both player1 and player2's discs in the board
      */
     public  Statistic analyse() {
         int P1Discs = 0;
