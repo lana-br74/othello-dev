@@ -61,18 +61,7 @@ public class BoardView extends View {
     protected void onDraw(Canvas canvas) {
         int height = getHeight();
         int width = getWidth();
-        //Paint lightgreenPaint = new Paint();
-        //Paint darkgreenPaint = new Paint();
 
-
-
-        //Paint paint = new Paint();
-        //canvas.drawLine(100, 200, 300, 400, paint);
-        //canvas.drawLine(200, 100, 500, 200, paint);
-        //paint.setColor(Color.BLACK);
-
-        //darkgreenPaint.setARGB(210, 0, 125, 180);
-        //lightgreenPaint.setARGB(250, 0, 125, 180);
         for (int i=0; i<8; i++) {
             for (int j=0; j<8; j++) {
                 Resources res = getResources();
@@ -83,21 +72,10 @@ public class BoardView extends View {
             }
         }
 
-        /*
-        Resources res = getResources();
-        Drawable draw = res.getDrawable(R.drawable.kth);
-        draw.setBounds(width/8*xpos, height/8*ypos, width/8*(xpos+1), height/8*(ypos+1));
-        draw.draw(canvas);
-        */
 
         if (model == null)
             return;
 
-
-        //Paint redPaint = new Paint();
-        //redPaint.setARGB(255, 255, 0, 0);
-        //Paint greenPaint = new Paint();
-        //greenPaint.setARGB(255, 0, 255, 0);
         for (Node node : model.getNodes())
             if (node.isMarked()) {
 
@@ -108,12 +86,6 @@ public class BoardView extends View {
                     player2Disc(node, width, height, canvas);
                 }
 
-
-                //canvas.drawCircle(
-                //      (float) (width / 8 * (node.getXCoordinate() + 0.5)),
-                //    (float) (height / 8 * (node.getYCoordinate() + 0.5)),
-                //  (float) (Math.min(width / 16, height / 16)),
-                //color);
             }
     }
     //Drawing the black disc

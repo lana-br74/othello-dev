@@ -65,16 +65,8 @@ public class MainActivity extends Activity {
                 }
             }
         }
-        ///
-        /*
-         String name ="";
-         try {
-             name = jsonPlayer.getString("coins");
-         }catch(Exception e){
 
-         }
-        ///
- */
+
         boardView = (BoardView) findViewById(R.id.boardView);
 
         score1 = (TextView)findViewById(R.id.score1);
@@ -241,11 +233,11 @@ public class MainActivity extends Activity {
         String score = ""+ statistic.getP1Discs()+ "  VS  " + statistic.getP2Discs();
 
         if(winOrLoseOrDraw > 0){
-            msg = "Player1 win";
+
+            msg = "Player2 win";           msg = "Player1 win";
         }else if(winOrLoseOrDraw == 0){
             msg = "draw";
         }else if(winOrLoseOrDraw < 0){
-            msg = "Player2 win";
         }
         msgDialog = new MessageDialog(MainActivity.this, msg,score);
         msgDialog.show();
