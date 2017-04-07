@@ -13,7 +13,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,6 +22,7 @@
         <activity android:name=".HelpActivity" />
         <activity android:name=".RegActivity" />
         <activity android:name=".SettingActivity" />
+        <activity android:name=".MessageDialog"></activity>
     </application>
 
 </manifest>

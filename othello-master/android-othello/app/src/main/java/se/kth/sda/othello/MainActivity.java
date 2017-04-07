@@ -38,16 +38,43 @@ public class MainActivity extends Activity {
     TextView player1;
     TextView player2;
     BoardView boardView;
+    Statistic statistic ;
 
     OthelloFactory gameFactory = new OthelloFactoryImp();
     Othello game;
+    private MessageDialog msgDialog;
+    boolean userIsLoggedIn = false;
 
     TextView turn;
+
+    JSONObject jsonPlayer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent currentintent = getIntent();
+        Bundle extras = currentintent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey("player")) {
+                userIsLoggedIn = true;
+                String jsonString = currentintent.getStringExtra("player");
+                try {
+                    jsonPlayer = new JSONObject(jsonString);
+                }catch(Exception e){
 
+                }
+            }
+        }
+        ///
+        /*
+         String name ="";
+         try {
+             name = jsonPlayer.getString("coins");
+         }catch(Exception e){
+
+         }
+        ///
+ */
         boardView = (BoardView) findViewById(R.id.boardView);
 
         score1 = (TextView)findViewById(R.id.score1);
@@ -97,10 +124,14 @@ public class MainActivity extends Activity {
             public void onClick(int x, int y) {
                 String nodeId = NodeImp.format(x, y);
                 try { //changes for othello
-                    game.move(game.getPlayerInTurn().getId(), nodeId);
-                    boardView.invalidate();
-                    showScores();
-                    showTurn();
+
+                        game.move(game.getPlayerInTurn().getId(), nodeId);
+                        boardView.invalidate();
+                        showScores();
+                        showTurn();
+                     if(!game.isActive()){
+                        statistic = boardView.analyse();
+                        gameOver(statistic.getP1Discs() - statistic.getP2Discs());}
 
 
                 } catch (IllegalStateException e) {
@@ -166,18 +197,22 @@ public class MainActivity extends Activity {
         super.finish();
     }
 
-    //Show the scores in the Main GUI
+    /**
+     * Show the scores in the Main GUI
+     */
     public void showScores(){
-        Statistic statistic = boardView.analyse();
+        statistic = boardView.analyse();
         score1.setText(" "+statistic.getP1Discs());
         score2.setText(" "+statistic.getP2Discs());
     }
 
 
-    //Show turn of the player
+    /**
+     *Show turn of the player
+     */
     public void showTurn(){
-        String r = game.getPlayerInTurn().getName() ;
-        if (r.equals("Player 1"))
+        String r = game.getPlayerInTurn().getId() ;
+        if (r.equals("P1"))
         {   player1.setTextColor(Color.WHITE);
             player1.setBackgroundColor(Color.BLUE);
             player2.setTextColor(Color.BLACK);
@@ -193,6 +228,24 @@ public class MainActivity extends Activity {
 
     }
 
+    /**
+     *Show the details of game over
+     */
+    private void gameOver(int winOrLoseOrDraw){
+
+        String msg = "";
+        String score = ""+ statistic.getP1Discs()+ "  VS  " + statistic.getP2Discs();
+
+        if(winOrLoseOrDraw > 0){
+            msg = "Player1 win";
+        }else if(winOrLoseOrDraw == 0){
+            msg = "draw";
+        }else if(winOrLoseOrDraw < 0){
+            msg = "Player2 win";
+        }
+        msgDialog = new MessageDialog(MainActivity.this, msg,score);
+        msgDialog.show();
+    }
 
 }
 

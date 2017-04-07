@@ -23,11 +23,7 @@ public class OthelloService {
 					halt(401, "Not authorized");
 
 				String username = req.headers("username");
-				String email = req.headers("email");
-				String password = req.headers("password");
-				String name = req.headers("name");
-				User user = new User(email,username,password,name);
-				data.registerUser(email,username,password,name);
+				User user = data.getUser(username);
 				return user;
 			}
 		}, new JsonTransformer());
