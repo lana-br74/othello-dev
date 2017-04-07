@@ -13,13 +13,35 @@ public class BoardImp implements Board {
     Node nodes[][] = new Node[8][8];
 
     // TODO: Correctly initialize the four inital nodes
-    public BoardImp() {
-        for (int i=0; i<8; i++) {
-            for (int j=0; j<8; j++) {
-                nodes[i][j] = new NodeImp(i,j);
+    public BoardImp()    {for (int i=0; i<8; i++) {
+        for (int j=0; j<8; j++) {
+
+            if(i==3 && j==3)
+            {
+                nodes[i][j] = new NodeImp("3,3","P2");
             }
+            else if (i==4 && j==4)
+            {
+                nodes[i][j] = new NodeImp("4,4","P2");
+            }
+            else if(i==4 && j==3)
+            {
+                nodes[i][j] = new NodeImp("4,3","P1");
+            }
+            else if (i==3 && j==4)
+            {
+                nodes[i][j] = new NodeImp("3,4","P1");
+            }
+            else
+                nodes[i][j] = new NodeImp(i,j);
         }
     }
+}
+
+
+
+
+
 
     @Override
     public List<Node> getNodes() {
@@ -36,5 +58,12 @@ public class BoardImp implements Board {
         int x = node.getXCoordinate();
         int y = node.getYCoordinate();
         nodes[x][y] = node;
+    }
+       //changes for othello
+    public Node getNode(String id) {
+        int x = Integer.valueOf(id.split(",")[0]);
+        int y = Integer.valueOf(id.split(",")[1]);
+        Node node = nodes [x][y];
+        return node;
     }
 }

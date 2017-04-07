@@ -1,17 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorControlHighlight"
+    android:forceHasOverlappingRendering="false"
     android:orientation="vertical"
     tools:context="se.kth.sda.othello.MainActivity">
 
-    <Button
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/logotext" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start a Human vs Human game!"
-        android:onClick="startHumanGame"
-        />
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/play"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="317dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/playbutton_selector"
+            android:clickable="true"
+            android:onClick="startHumanGame"
+            android:scaleType="fitCenter"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_weight="0.46">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/Reg"
+                android:layout_width="93dp"
+                android:layout_height="33dp"
+                android:background="@drawable/login_selector"
+                android:onClick="Login"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/help"
+                android:layout_width="22dp"
+                android:layout_height="31dp"
+                android:layout_gravity="right"
+                android:background="@drawable/help_selector"
+                android:onClick="help"
+                android:scaleType="fitCenter" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/setting"
+                android:layout_width="36dp"
+                android:layout_height="31dp"
+                android:background="@drawable/settings_selector"
+                android:onClick="setting"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
