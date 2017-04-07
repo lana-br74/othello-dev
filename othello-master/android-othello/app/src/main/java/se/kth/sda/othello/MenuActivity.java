@@ -1,6 +1,7 @@
 package se.kth.sda.othello;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MenuActivity extends AppCompatActivity {
   //  Intent currentintent = getIntent();
    JSONObject jsonPlayer = null;
     boolean userIsLoggedIn = false;
+    private UserDialog userDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,20 @@ public class MenuActivity extends AppCompatActivity {
 
     }
     public void Login(View view){
+
+        //If the user play with no log in
         Intent itn1 = new Intent(this, RegActivity.class);
         startActivity(itn1);
+
+        //If the user log in
+        /*String userName1 = "";
+        String email1 = "";
+        String name1 = "";
+        int coins1 = 0;
+        int wins1 = 0;
+        int loses1 = 0;
+        userDialog = new UserDialog(MenuActivity.this, userName1,email1,name1,coins1, wins1,loses1);
+        userDialog.show();*/
     }
 
      public void help(View v) {
