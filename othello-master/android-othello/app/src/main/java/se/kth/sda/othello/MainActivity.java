@@ -197,7 +197,7 @@ public class MainActivity extends Activity {
         super.finish();
     }
 
-    /*
+    /**
      * Show the scores in the Main GUI
      */
     public void showScores(){
@@ -207,7 +207,7 @@ public class MainActivity extends Activity {
     }
 
 
-    /*
+    /**
      *Show turn of the player
      */
     public void showTurn(){
@@ -228,7 +228,7 @@ public class MainActivity extends Activity {
 
     }
 
-    /*
+    /**
      *Show the details of game over
      */
     private void gameOver(int winOrLoseOrDraw){

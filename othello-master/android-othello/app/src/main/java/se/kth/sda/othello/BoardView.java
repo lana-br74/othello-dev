@@ -131,7 +131,7 @@ public class BoardView extends View {
 
     }
 
-    /*
+    /**
      * Compute the discs in the board
      */
     public  Statistic analyse() {

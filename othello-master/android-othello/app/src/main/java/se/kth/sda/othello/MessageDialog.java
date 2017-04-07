@@ -10,7 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-/*
+/**
  * The dialog of game over
  */
 public class MessageDialog extends Dialog {
