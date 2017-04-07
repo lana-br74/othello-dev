@@ -72,6 +72,15 @@ public class MainActivity extends Activity {
         score1 = (TextView)findViewById(R.id.score1);
         score2 = (TextView)findViewById(R.id.score2);
         player1 = (TextView)findViewById(R.id.player1);
+        String name ="";
+        if (jsonPlayer!= null) {
+            try {
+                name = jsonPlayer.getString("name");
+                player1.setText("" +name);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         player2 = (TextView)findViewById(R.id.player2);
         // Font path
         String fontPath = "fonts/CelestiaMedium-v1.51.ttf";

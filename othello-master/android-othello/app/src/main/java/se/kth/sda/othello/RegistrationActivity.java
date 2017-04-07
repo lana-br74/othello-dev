@@ -84,6 +84,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             try {
                                 Toast.makeText(getBaseContext(), "Welcome .." + response.getString("name"), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getBaseContext(), MenuActivity.class);
+                                intent.putExtra("player",response.toString());
                                 startActivityForResult(intent, 0);
                             } catch (JSONException e) {
                                 e.printStackTrace();
