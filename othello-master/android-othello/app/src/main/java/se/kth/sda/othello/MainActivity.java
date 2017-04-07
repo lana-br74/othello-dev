@@ -197,7 +197,9 @@ public class MainActivity extends Activity {
         super.finish();
     }
 
-    //Show the scores in the Main GUI
+    /*
+     * Show the scores in the Main GUI
+     */
     public void showScores(){
         statistic = boardView.analyse();
         score1.setText(" "+statistic.getP1Discs());
@@ -205,10 +207,12 @@ public class MainActivity extends Activity {
     }
 
 
-    //Show turn of the player
+    /*
+     *Show turn of the player
+     */
     public void showTurn(){
-        String r = game.getPlayerInTurn().getName() ;
-        if (r.equals("Player 1"))
+        String r = game.getPlayerInTurn().getId() ;
+        if (r.equals("P1"))
         {   player1.setTextColor(Color.WHITE);
             player1.setBackgroundColor(Color.BLUE);
             player2.setTextColor(Color.BLACK);
@@ -224,7 +228,9 @@ public class MainActivity extends Activity {
 
     }
 
-    //game over
+    /*
+     *Show the details of game over
+     */
     private void gameOver(int winOrLoseOrDraw){
 
         String msg = "";

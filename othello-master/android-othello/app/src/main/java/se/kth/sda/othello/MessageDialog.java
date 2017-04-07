@@ -1,6 +1,6 @@
 package se.kth.sda.othello;
 
-import android.app.AlertDialog;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static android.app.Activity.RESULT_OK;
-import static se.kth.sda.othello.MainActivity.GAME_RESULT;
-
-
+/*
+ * The dialog of game over
+ */
 public class MessageDialog extends Dialog {
 
     public MessageDialog(Context context, String msg,String score) {
