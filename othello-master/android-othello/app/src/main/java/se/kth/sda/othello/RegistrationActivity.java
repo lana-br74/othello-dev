@@ -1,5 +1,4 @@
 package se.kth.sda.othello;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -14,6 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,9 +29,11 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
     }
 
-    public void logIn(View view){
+ public void logIn(View view){
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
@@ -100,8 +104,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             };
 
-            queue.add(stringRequest);
-        }
+        queue.add(stringRequest);
+    }
+
+
     }
 }
 
