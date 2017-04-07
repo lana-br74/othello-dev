@@ -135,7 +135,9 @@ public class BoardView extends View {
     }
 
     /**
+     * @author Shuai
      * Compute the discs in the board
+     * @return An Object including both player1 and player2's discs in the board
      */
     public  Statistic analyse() {
         int P1Discs = 0;
