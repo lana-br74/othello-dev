@@ -72,7 +72,11 @@ public class BoardView extends View {
             }
         }
 
-
+/**
+ * @author Mohammad
+ * Drawing the discs inside one element on the board
+ * call 2 methods to draw each player disc
+ */
         if (model == null)
             return;
 
@@ -88,7 +92,7 @@ public class BoardView extends View {
 
             }
     }
-    //Drawing the black disc
+    //draw the user disc
     public void player1Disc (Node node, int width, int height, Canvas canvas) {
 
         Resources res = getResources();
@@ -96,7 +100,8 @@ public class BoardView extends View {
         draw.setBounds(node.getXCoordinate()*width/8, node.getYCoordinate()*height/8, (node.getXCoordinate()+1)*width/8, (node.getYCoordinate()+1)*height/8);
         draw.draw(canvas);
     }
-    //Drawing the white disc
+
+    //draw player2 Disc
     public void player2Disc (Node node, int width, int height, Canvas canvas) {
 
         Resources res = getResources();

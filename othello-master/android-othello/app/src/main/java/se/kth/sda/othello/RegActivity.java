@@ -43,6 +43,11 @@ import se.kth.sda.othello.imp.OthelloFactoryImp;
  * Created by Samer Obid on 2017-03-24.
  */
 
+/**
+ * Login with facebook
+ * @author Mohammad
+ */
+
 public class RegActivity extends AppCompatActivity {
     public static final String GAME_TYPE = "GAME_TYPE";
     public static final String GAME_HUMAN = "HUMAN";

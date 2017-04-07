@@ -33,6 +33,7 @@ public class MainActivity extends Activity {
     public static final String GAME_HUMAN = "HUMAN";
     public static final String GAME_RESULT = "GAME_RESULT";
 
+    User user;
     TextView score1 ;
     TextView score2 ;
     TextView player1;
@@ -66,8 +67,7 @@ public class MainActivity extends Activity {
             }
         }
 
-
-        boardView = (BoardView) findViewById(R.id.boardView);
+         boardView = (BoardView) findViewById(R.id.boardView);
 
         score1 = (TextView)findViewById(R.id.score1);
         score2 = (TextView)findViewById(R.id.score2);
@@ -233,11 +233,15 @@ public class MainActivity extends Activity {
         String score = ""+ statistic.getP1Discs()+ "  VS  " + statistic.getP2Discs();
 
         if(winOrLoseOrDraw > 0){
-
-            msg = "Player2 win";           msg = "Player1 win";
+            msg = "Player1 win";
+            user.addCoins(100);
+            user.addWins();
         }else if(winOrLoseOrDraw == 0){
             msg = "draw";
         }else if(winOrLoseOrDraw < 0){
+            msg = "Player2 win";
+            user.subtractCoins(100);
+            user.addLoses();
         }
         msgDialog = new MessageDialog(MainActivity.this, msg,score);
         msgDialog.show();
