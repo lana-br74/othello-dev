@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 import se.kth.sda.othello.MainActivity;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 public class MenuActivity extends AppCompatActivity {
   //  User currentPlayer = null;
   //  Intent currentintent = getIntent();
+    TextView user ;
+    TextView coins ;
    JSONObject jsonPlayer = null;
     boolean userIsLoggedIn = false;
     private UserDialog userDialog;
@@ -38,6 +41,20 @@ public class MenuActivity extends AppCompatActivity {
                 }catch(Exception e){
 
                 }
+            }
+        }
+        user = (TextView)findViewById(R.id.Username);
+        coins = (TextView)findViewById(R.id.Coins);
+        String name ="";
+        int coinNumber = 0;
+        if (userIsLoggedIn ) {
+            try {
+                name = jsonPlayer.getString("name");
+                coins.setText("" +name);
+                coinNumber = jsonPlayer.getInt("coins");
+                coins.setText("" + coinNumber);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
 
