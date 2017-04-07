@@ -198,6 +198,7 @@ public class MainActivity extends Activity {
     }
 
     /**
+     * @author Shuai
      * Show the scores in the Main GUI
      */
     public void showScores(){
@@ -208,6 +209,7 @@ public class MainActivity extends Activity {
 
 
     /**
+     * @author Shuai
      *Show turn of the player
      */
     public void showTurn(){
@@ -229,7 +231,9 @@ public class MainActivity extends Activity {
     }
 
     /**
-     *Show the details of game over
+     * @author Shuai
+     * Show the details of game over
+     * @param winOrLoseOrDraw  player1's discs subtract player2's discs
      */
     private void gameOver(int winOrLoseOrDraw){
 
