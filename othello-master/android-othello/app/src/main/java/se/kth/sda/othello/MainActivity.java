@@ -45,9 +45,7 @@ public class MainActivity extends Activity {
     Othello game;
     private MessageDialog msgDialog;
     boolean userIsLoggedIn = false;
-
     TextView turn;
-
     JSONObject jsonPlayer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

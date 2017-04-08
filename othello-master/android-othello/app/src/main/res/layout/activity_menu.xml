@@ -55,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:layout_weight="0.46">
+        android:layout_weight="0.46"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,17 +72,15 @@
 
             <TextView
                 android:id="@+id/Coins"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
                 android:text="Coins"
                 android:textSize="18sp" />
 
             <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
             <ImageButton
                 android:id="@+id/Reg"
@@ -94,10 +92,9 @@
 
             <TextView
                 android:id="@+id/Username"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
                 android:text="User Name"
                 android:textSize="18sp" />
 

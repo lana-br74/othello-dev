@@ -20,7 +20,7 @@ public class MenuActivity extends AppCompatActivity {
   //  Intent currentintent = getIntent();
     TextView user ;
     TextView coins ;
-   JSONObject jsonPlayer = null;
+    JSONObject jsonPlayer = null;
     boolean userIsLoggedIn = false;
     private UserDialog userDialog;
 
@@ -50,7 +50,7 @@ public class MenuActivity extends AppCompatActivity {
         if (userIsLoggedIn ) {
             try {
                 name = jsonPlayer.getString("name");
-                coins.setText("" +name);
+                user.setText("" +name);
                 coinNumber = jsonPlayer.getInt("coins");
                 coins.setText("" + coinNumber);
             } catch (JSONException e) {
@@ -86,9 +86,29 @@ public class MenuActivity extends AppCompatActivity {
     }
     public void Login(View view){
 
-        //If the user play with no log in
-        Intent itn1 = new Intent(this, RegActivity.class);
-        startActivity(itn1);
+        // if user is loged in display the user data on the server.
+        if(userIsLoggedIn){
+            try {
+                String name = jsonPlayer.getString("name");
+                String username = jsonPlayer.getString("userName");
+                String email = jsonPlayer.getString("email");
+                int coinNumber = jsonPlayer.getInt("coins");
+                int wins = jsonPlayer.getInt("wins");
+                int loses = jsonPlayer.getInt("loses");
+                userDialog = new UserDialog(MenuActivity.this,username,email,name,coinNumber,wins,loses);
+                userDialog.show();
+            } catch (JSONException e) {
+               //some error handling
+                e.printStackTrace();
+            }
+
+
+
+        }else {
+            //If the user play with no log in
+            Intent intent = new Intent(this, RegActivity.class);
+            startActivity(intent);
+        }
 
     }
 
