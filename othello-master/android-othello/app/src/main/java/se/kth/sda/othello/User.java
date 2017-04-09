@@ -4,7 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by tmpuser-10234 on 4/4/17.
+ * This class is responsible for holding the user information that comes from the server in json format, and
+ * performing different opeaation like adding or subtracting coins. and viceversa.
+ * @author lana.
  */
 
 public class User {
@@ -22,9 +24,9 @@ public class User {
             this.password = jsonObject.getString("password");
             this.email = jsonObject.getString("email");
             this.name = jsonObject.getString("name");
-            this.coins = 100;
-            this.wins = 0;
-            this.loses = 0;
+            this.coins = jsonObject.getInt("coins");
+            this.wins = jsonObject.getInt("wins");
+            this.loses = jsonObject.getInt("loses");
         }catch(Exception e){
 
         }
@@ -76,5 +78,22 @@ public class User {
 
     public void addLoses(){
         this.loses+=1;
+    }
+
+    public JSONObject toJson(){
+        JSONObject jsonObj = new JSONObject();
+            try {
+                jsonObj.put("userName", this.getUserName());
+                jsonObj.put("password", this.getPassword());
+                jsonObj.put("email", this.getEmail());
+                jsonObj.put("name", this.getName());
+                jsonObj.put("coins", this.getCoins());
+                jsonObj.put("wins", this.getWins());
+                jsonObj.put("loses", this.getLoses());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        return jsonObj;
     }
 }
