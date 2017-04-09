@@ -3,7 +3,7 @@ package se.kth.sda.othello.service;
 import java.util.HashMap;
 
 /**
- * A class to deal with the users data , the users data should be in a data base.
+ * A class to deal with the users data , the class simulates the data base and the required functions.
  * This class is responsible of reading and writing the data from the database, 
  * methods like create new user and check if a user is authorized are included as well. 
  * @author lana

@@ -47,10 +47,18 @@ public class MainActivity extends Activity {
     boolean userIsLoggedIn = false;
     TextView turn;
     JSONObject jsonPlayer = null;
+
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // @suthor lana
+        // get the json information from the server.and display it.
         Intent currentintent = getIntent();
         Bundle extras = currentintent.getExtras();
         if (extras != null) {
@@ -59,6 +67,7 @@ public class MainActivity extends Activity {
                 String jsonString = currentintent.getStringExtra("player");
                 try {
                     jsonPlayer = new JSONObject(jsonString);
+                    user = new User(jsonPlayer);
                 }catch(Exception e){
 
                 }
@@ -66,19 +75,14 @@ public class MainActivity extends Activity {
         }
 
          boardView = (BoardView) findViewById(R.id.boardView);
-
         score1 = (TextView)findViewById(R.id.score1);
         score2 = (TextView)findViewById(R.id.score2);
         player1 = (TextView)findViewById(R.id.player1);
         String name ="";
-        if (jsonPlayer!= null) {
-            try {
-                name = jsonPlayer.getString("name");
-                player1.setText("" +name);
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (userIsLoggedIn) {
+            name = user.getName();
+            player1.setText("" + name);
             }
-        }
         player2 = (TextView)findViewById(R.id.player2);
         // Font path
         String fontPath = "fonts/CelestiaMedium-v1.51.ttf";
@@ -86,7 +90,6 @@ public class MainActivity extends Activity {
         String fontPath2 = "fonts/Capture_it.ttf";
         String fontPath3 = "fonts/FFF_Tusj.ttf";
         String fontPath4 = "fonts/SEASRN__.ttf";
-        //String fontPath2 = "fonts/HelveticaNeue-Bold_0.otf";
 
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), fontPath3);
@@ -97,8 +100,6 @@ public class MainActivity extends Activity {
         player2.setTypeface(tf);
         score1.setTypeface(tf);
         score2.setTypeface(tf);
-
-
 
 
         if (this.getIntent().getExtras().getString(GAME_TYPE).equals(GAME_HUMAN)) {
@@ -138,58 +139,17 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
-
     }
 
 
+    /** This method is responsible of quiting the game.
+     * @author lana
+     * @param view
+     */
     public void quitGame(View view) {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://130.237.224.92:4567/report/" + "roberto";
-
-        final Map<String, String> mHeaders = new ArrayMap<String, String>();
-        mHeaders.put("pwd", "123456");
-
-        final JSONObject jsonBody = new JSONObject();
-        try {
-            jsonBody.put("winner", "P1");
-            jsonBody.put("duration", "12");
-            jsonBody.put("moves", "108");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        // Request a string response from the provided URL.
-        JsonObjectRequest stringRequest = new JsonObjectRequest(
-                Request.Method.POST, url,
-                jsonBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String str = response.toString();
-
-                        try {
-                            Toast.makeText(getBaseContext(), response.getString("wins"), Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Intent intent = new Intent(getBaseContext(), MenuActivity.class);
-                        startActivityForResult(intent, 0);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getBaseContext(), "login failed!", Toast.LENGTH_LONG).show();
-            }
-        }) {
-            public Map<String, String> getHeaders(){
-                return mHeaders;
-            }
-        };
-
-        queue.add(stringRequest);
-
+        if (userIsLoggedIn) {
+            updateGameResults();}
+        // to be continued
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra(GAME_RESULT, "P1");
         setResult(RESULT_OK, intent);
@@ -205,7 +165,6 @@ public class MainActivity extends Activity {
         score1.setText(" "+statistic.getP1Discs());
         score2.setText(" "+statistic.getP2Discs());
     }
-
 
     /**
      * @author Shuai
@@ -231,30 +190,100 @@ public class MainActivity extends Activity {
 
     /**
      * @author Shuai
-     * Show the details of game over
+     * * Show the details of game over
+     * @author lana ,
+     * changing the display and update the coins in case the user is logged in.
      * @param winOrLoseOrDraw  player1's discs subtract player2's discs
      */
     private void gameOver(int winOrLoseOrDraw){
 
         String msg = "";
         String score = ""+ statistic.getP1Discs()+ "  VS  " + statistic.getP2Discs();
-
         if(winOrLoseOrDraw > 0){
-            msg = "Player1 win";
-            user.addCoins(100);
-            user.addWins();
+            if(userIsLoggedIn) {
+                user.addCoins(50);
+                user.addWins();
+                msg = user.getName() +" win";
+                msg += "\n" +"congratulations . You got 50 coins extra!!! ";
+            }else {
+                msg = "Player1 win";
+            }
         }else if(winOrLoseOrDraw == 0){
-            msg = "draw";
-        }else if(winOrLoseOrDraw < 0){
-            msg = "Player2 win";
-            user.subtractCoins(100);
-            user.addLoses();
+            if(userIsLoggedIn) {
+                user.addCoins(25);
+                msg =  " draw";
+                msg += "\n" +user.getName()+" congratulations . You got 25 coins extra!!! ";
+            }else {
+                msg = "draw";
+            }
+        }else if(winOrLoseOrDraw < 0) {
+
+            if (userIsLoggedIn) {
+                user.subtractCoins(50);
+                user.addLoses();
+                msg += "\n" + user.getName() + " bad luck . You lost 50 coins !!! ";
+            } else {
+                msg = "Player2 win";
+            }
         }
-        msgDialog = new MessageDialog(MainActivity.this, msg,score);
+        if (userIsLoggedIn) {
+            updateGameResults();}
+        msgDialog = new MessageDialog(MainActivity.this, msg,score,userIsLoggedIn,user);
         msgDialog.show();
     }
 
+
+    /**
+     * This method is responsible of sending the results to the server to update the player information.
+     * @author lana
+     */
+    public void updateGameResults(){
+        String username = user.getUserName();
+        String pwd = user.getPassword();
+        int coins = user.getCoins();
+        int wins = user.getWins();
+        int loses = user.getLoses();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://10.0.2.2:4567/report/"+username;
+
+        final Map<String, String> mHeaders = new ArrayMap<String, String>();
+        mHeaders.put("userName",username);
+        mHeaders.put("password", pwd);
+        mHeaders.put("coins", ""+coins);
+        mHeaders.put("wins", ""+wins);
+        mHeaders.put("loses", ""+loses);
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Toast.makeText(getBaseContext(), "Results for "+response.getString("name")+"is upated", Toast.LENGTH_LONG).show();
+                             user = new User(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getBaseContext(), "update failed!", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            public Map<String, String> getHeaders(){
+
+                return mHeaders;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
 }
+
+
+
+
 
 
 

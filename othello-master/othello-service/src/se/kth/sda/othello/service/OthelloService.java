@@ -30,6 +30,8 @@ public class OthelloService {
 					halt(401, "Not authorized");
 				String username = req.headers("username");
 				User user = dataBaseCon.getUser(username);
+				System.out.println("login");
+				System.out.println(username);
 				try {
 					dataBaseCon.finalize();
 				} catch (Throwable e) {
@@ -42,15 +44,27 @@ public class OthelloService {
 		post("/report/:login_name", new Route() {
 			public Object handle(Request req, Response res) throws Exception {
 				DataBaseCon dataBaseCon = new DataBaseCon();
-				if (dataBaseCon.UserAccountAuthorized(req.headers("userName"),req.headers("password")))
-					halt(406, "Not authorized");
-				InputStream is = req.raw().getInputStream();
-
-				Gson gb = new GsonBuilder().create();
-				MatchResult input = gb.fromJson(new InputStreamReader(is), MatchResult.class);
-				System.out.println(input.duration);
+				if (!(dataBaseCon.UserAccountAuthorized(req.headers("userName"),req.headers("password"))))
+						halt(406, "Not authorized");
+			//	InputStream is = req.raw().getInputStream();
+			//	Gson gb = new GsonBuilder().create();
+			//	MatchResult input = gb.fromJson(new InputStreamReader(is), MatchResult.class);
+			//	System.out.println(input.duration);
 				String username = req.headers("userName");
+				String password = req.headers("password");
+				String coinsString = req.headers("coins");
+				System.out.println("connect serveice");
+				System.out.println(username);
+				int coins = Integer.valueOf(coinsString);
+				System.out.println(coins);
+				int wins = Integer.valueOf(req.headers("wins"));
+				System.out.println(wins);
+				int loses = Integer.valueOf(req.headers("loses"));
+				System.out.println(loses);
+				boolean isUpdated = dataBaseCon.updateUserCoins(username,coins,wins,loses);
+				System.out.println(isUpdated);
 				User user = dataBaseCon.getUser(username);
+				
 				try {
 					dataBaseCon.finalize();
 				} catch (Throwable e) {
@@ -78,6 +92,7 @@ public class OthelloService {
 				}
 				dataBaseCon.registerUser(email,username,password,name);
 				User user = dataBaseCon.getUser(username);
+				System.out.println("register");
 				try {
 					dataBaseCon.finalize();
 				} catch (Throwable e) {

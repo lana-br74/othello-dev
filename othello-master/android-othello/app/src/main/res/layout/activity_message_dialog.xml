@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:text=""
             android:textColor="@color/colorBlue"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:gravity="center"/>
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_marginTop="10dp"
             android:text=""
             android:textColor="@color/colorBlue"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:gravity="center"/>
 
         <Button

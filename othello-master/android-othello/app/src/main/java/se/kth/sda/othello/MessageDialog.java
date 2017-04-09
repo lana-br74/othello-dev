@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 /**
  * The dialog of game over
+ * @author lana
+ * changing the contents when is the user logged in.
  */
 public class MessageDialog extends Dialog {
 
-    public MessageDialog(Context context, String msg,String score) {
+    public MessageDialog(Context context, String msg, String score, final boolean  isLogged, final User user) {
 
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -40,6 +42,9 @@ public class MessageDialog extends Dialog {
             public void onClick(View v) {
                 dismiss();
                 Intent it = new Intent(v.getContext(),MenuActivity.class);
+                if(isLogged) {
+                    String userjson = user.toJson().toString();
+                    it.putExtra("player",userjson);}
                 v.getContext().startActivity(it);
 
 

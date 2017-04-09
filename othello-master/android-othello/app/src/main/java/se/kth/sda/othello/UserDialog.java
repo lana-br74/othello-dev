@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-/**
- * The dialog of user information
+/** The dialog of user information
+ * @author lana
+ * passong the user information from the server
+ *
  */
 public class UserDialog extends Dialog {
 

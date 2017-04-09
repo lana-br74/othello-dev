@@ -44,6 +44,11 @@ import se.kth.sda.othello.imp.OthelloFactoryImp;
  */
 
 /**
+ * @author lana
+ * login to the server which contains databasee.
+ */
+
+/**
  * Login with facebook
  * @author Mohammad
  */

@@ -4,7 +4,9 @@ import java.sql.*;
 
 
 /**
- * This class provides the database connection and some of the required functions Othello game
+ * This class provides the database connection and some of 
+ * the required functions for Othello game, like authentication , login and
+ * registration and geting the user information and updating it.
  * @author lana
  *
  */
@@ -12,6 +14,7 @@ public class DataBaseCon {
 
 	private Connection conn = null;
 	private String othelloUrl = "jdbc:hsqldb:file:/NOBACKUP/tmpuser-10234/hsqldb-2.3.4;shutdown=true";
+	//private String othelloUrl = "jdbc:hsqldb:file:D:\\hsqldb-2.3.4;shutdown=true";
 
 
 	public DataBaseCon(){
@@ -28,7 +31,7 @@ public class DataBaseCon {
 	public DataBaseCon(String url, String user_name, String password) {
 		try {
 			Class.forName("org.hsqldb.jdbcDriver");  
-			conn = DriverManager.getConnection(othelloUrl);
+			conn = DriverManager.getConnection(url, user_name, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -54,6 +57,20 @@ public class DataBaseCon {
 		}
 	}
 
+	// This sql instrustion to create the matching table in HSqldb database
+	/*
+	 * CREATE TABLE PUBLIC.USERS (
+	USERNAME VARCHAR(100),
+	PASSWORD VARCHAR(100),
+	NAME VARCHAR(100),
+	EMAIL VARCHAR(100),
+	COINS INTEGER,
+	WINS INTEGER,
+	LOSES INTEGER,
+	CONSTRAINT USERS_PK PRIMARY KEY (USERNAME)
+    ) ;
+
+	 */
 	public boolean userNameExisted(String username){
 		//check if the user name is existed
 
@@ -74,22 +91,23 @@ public class DataBaseCon {
 
 
 	public boolean UserAccountAuthorized(String userName,String password){
-
+		
+        if(userNameExisted(userName)){
 		try {
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?");
+			PreparedStatement stmt = conn.prepareStatement("SELECT PASSWORD FROM USERS WHERE USERNAME = ? ");
 			stmt.setString(1, userName);
-			stmt.setString(2, password);
 			ResultSet rs = stmt.executeQuery();
 			if(rs != null) 
 			{
-
-				return true;
-
+				while(rs.next()){
+					 if(rs.getString("PASSWORD").equals(password))  return true;
+				}
 			}
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		} 
+        }
 		return false;
 	}
 
@@ -103,7 +121,7 @@ public class DataBaseCon {
 			if(rs != null) 
 			{
 				while(rs.next()){
-					currentUser = new User(rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"),rs.getString("NAME"));	
+					currentUser = new User(rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"),rs.getString("NAME"),rs.getInt("COINS"),rs.getInt("WINS"),rs.getInt("LOSES"));	
 				}
 			}
 		} catch (SQLException e) {
@@ -128,6 +146,25 @@ public class DataBaseCon {
 			
 		} catch (SQLException e) {
 
+			e.printStackTrace();
+			return false;
+		} 
+		
+	}
+	
+	public boolean updateUserCoins(String userName,int coins,int wins,int loses){
+		try {
+			PreparedStatement stmt = conn.prepareStatement("UPDATE USERS SET COINS = ?, WINS = ?, LOSES = ?  WHERE USERNAME = ?");
+			stmt.setInt(1, coins);
+			stmt.setInt(2, wins);
+			stmt.setInt(3, loses);
+			stmt.setString(4, userName);
+			stmt.executeUpdate();
+			System.out.println("updated");
+				return true;
+			
+		} catch (SQLException e) {
+			System.out.println(" not updated");
 			e.printStackTrace();
 			return false;
 		} 

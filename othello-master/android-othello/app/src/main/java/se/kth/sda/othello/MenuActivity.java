@@ -15,9 +15,12 @@ import se.kth.sda.othello.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/**
+ * @author lana
+ * part : change the display and pass the json objects in case the user logged in.
+ */
 public class MenuActivity extends AppCompatActivity {
-  //  User currentPlayer = null;
-  //  Intent currentintent = getIntent();
     TextView user ;
     TextView coins ;
     JSONObject jsonPlayer = null;
@@ -30,7 +33,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Intent currentintent = getIntent();
-
         Bundle extras = currentintent.getExtras();
         if (extras != null) {
             if (extras.containsKey("player")) {
@@ -62,8 +64,6 @@ public class MenuActivity extends AppCompatActivity {
 
     /** Called when the user clicks the button */
      public void startHumanGame(View view) {
-
-
          String name ="";
          if(userIsLoggedIn) {
              try {
@@ -78,9 +78,6 @@ public class MenuActivity extends AppCompatActivity {
 
          Intent intent = new Intent(this, MainActivity.class);
          if(userIsLoggedIn) intent.putExtra("player",jsonPlayer.toString());
-
-
-
         intent.putExtra(MainActivity.GAME_TYPE, MainActivity.GAME_HUMAN);startActivityForResult(intent, 0);
 
     }
@@ -101,9 +98,6 @@ public class MenuActivity extends AppCompatActivity {
                //some error handling
                 e.printStackTrace();
             }
-
-
-
         }else {
             //If the user play with no log in
             Intent intent = new Intent(this, RegActivity.class);

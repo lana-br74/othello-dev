@@ -22,6 +22,10 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+/**
+ * Thos class is responsible of registring  anew user on the server.
+ * @author lana
+ */
 
 public class RegistrationActivity extends AppCompatActivity {
 

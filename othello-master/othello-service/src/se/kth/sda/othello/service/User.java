@@ -24,6 +24,16 @@ public class User {
 		this.wins = 0;
 		this.loses = 0;
 	}
+	
+	public User(String email,String userName, String password,String name, int coins, int wins, int loses){
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.coins = coins;
+		this.wins = wins;
+		this.loses = loses;
+	}
 
 	public String getUserName(){
 		return this.userName;
