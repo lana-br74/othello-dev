@@ -26,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
     JSONObject jsonPlayer = null;
     boolean userIsLoggedIn = false;
     private UserDialog userDialog;
+    private CoinsDialog coinsDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +65,20 @@ public class MenuActivity extends AppCompatActivity {
 
     /** Called when the user clicks the button */
      public void startHumanGame(View view) {
-         String name ="";
+         int coins = 0 ;
          if(userIsLoggedIn) {
              try {
-                 name = jsonPlayer.getString("coins");
+                 coins  = jsonPlayer.getInt("coins");
+                 if(coins < 100){
+                     coinsDialog = new CoinsDialog(MenuActivity.this);
+                     coinsDialog.show();
+                 }
              } catch (Exception e) {
 
              }
          }
 
-         Toast t = Toast.makeText(this,""+name, Toast.LENGTH_SHORT);
+         Toast t = Toast.makeText(this,""+ coins, Toast.LENGTH_SHORT);
          t.show();
 
          Intent intent = new Intent(this, MainActivity.class);
