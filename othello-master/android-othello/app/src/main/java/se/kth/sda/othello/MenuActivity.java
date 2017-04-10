@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity {
              }
          }
 
-         Toast t = Toast.makeText(this,""+ coins, Toast.LENGTH_SHORT);
+        Toast t = Toast.makeText(this,""+ coins, Toast.LENGTH_SHORT);
          t.show();
 
          Intent intent = new Intent(this, MainActivity.class);

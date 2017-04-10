@@ -13,9 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * The dialog of game over
+ * When the player don't have enough coins, The dialog will pop up
  * @author Shuai
- * changing the contents when is the user logged in.
  */
 public class CoinsDialog extends Dialog {
 
@@ -29,7 +28,7 @@ public class CoinsDialog extends Dialog {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                //dismiss();
             }
         });
 
@@ -38,7 +37,7 @@ public class CoinsDialog extends Dialog {
         Add50.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                //dismiss();
             }
         });
 
