@@ -69,21 +69,26 @@ public class MenuActivity extends AppCompatActivity {
          if(userIsLoggedIn) {
              try {
                  coins  = jsonPlayer.getInt("coins");
-                 if(coins < 100){
+                 if(coins <100){
                      coinsDialog = new CoinsDialog(MenuActivity.this);
                      coinsDialog.show();
                  }
+                 else{
+                     Intent intent = new Intent(this, MainActivity.class);
+                     if(userIsLoggedIn) intent.putExtra("player",jsonPlayer.toString());
+                     intent.putExtra(MainActivity.GAME_TYPE, MainActivity.GAME_HUMAN);startActivityForResult(intent, 0);
+                 }
              } catch (Exception e) {
-
+                 e.printStackTrace();
              }
          }
-
+        else{
         Toast t = Toast.makeText(this,""+ coins, Toast.LENGTH_SHORT);
          t.show();
-
          Intent intent = new Intent(this, MainActivity.class);
          if(userIsLoggedIn) intent.putExtra("player",jsonPlayer.toString());
-        intent.putExtra(MainActivity.GAME_TYPE, MainActivity.GAME_HUMAN);startActivityForResult(intent, 0);
+         intent.putExtra(MainActivity.GAME_TYPE, MainActivity.GAME_HUMAN);startActivityForResult(intent, 0);}
+
 
     }
     public void Login(View view){
